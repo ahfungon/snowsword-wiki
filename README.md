@@ -30,10 +30,47 @@ streamlit run app.py
 
 ### 在线部署
 
-1. Fork 本仓库到 GitHub
-2. 在 Streamlit Cloud 连接 GitHub 仓库
-3. 在 Secrets 中添加 `DEEPSEEK_API_KEY`
-4. 部署完成！
+#### 方式 1：一键脚本（推荐）
+
+```bash
+# 1. 进入项目目录
+cd snowsword-wiki
+
+# 2. 执行部署脚本
+./deploy.sh
+```
+
+脚本会自动：
+- 检查并安装 GitHub CLI
+- 登录 GitHub（如未登录）
+- 创建 GitHub 仓库
+- 推送代码
+
+#### 方式 2：手动部署
+
+**步骤 1：创建 GitHub 仓库**
+```bash
+# 使用 GitHub CLI
+gh repo create ahfungon/snowsword-wiki --public --source=. --remote=origin --push
+
+# 或使用网页 https://github.com/new 创建后推送
+git remote add origin https://github.com/ahfungon/snowsword-wiki.git
+git push -u origin main
+```
+
+**步骤 2：部署到 Streamlit Cloud**
+
+1. 访问 https://streamlit.io/cloud
+2. 使用 GitHub 登录
+3. 点击 **New app**
+4. 选择仓库：`ahfungon/snowsword-wiki`
+5. 主文件路径：`app.py`
+6. 点击 **Advanced settings** → **Secrets**
+7. 添加：
+   ```
+   DEEPSEEK_API_KEY = "sk-cdebe0fafcf9406d962e3e09a0404e4b"
+   ```
+8. 点击 **Deploy**
 
 ## 使用说明
 
