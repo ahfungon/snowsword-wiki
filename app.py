@@ -173,6 +173,10 @@ query = st.text_input(
 )
 
 # 示例问题
+def set_query(query_text):
+    """设置查询文本"""
+    st.session_state.query_input = query_text
+
 if not query:
     st.caption("💡 试试这些深度问题：")
     example_cols = st.columns(3)
@@ -185,14 +189,14 @@ if not query:
         "北凉和北莽的冲突根源是什么？"
     ]
     
-    # 初始化 session_state
-    if 'query_input' not in st.session_state:
-        st.session_state.query_input = ""
-    
     for i, ex in enumerate(examples):
-        if example_cols[i % 3].button(ex, key=f"ex_{i}", use_container_width=True):
-            st.session_state.query_input = ex
-            st.rerun()
+        example_cols[i % 3].button(
+            ex, 
+            key=f"ex_{i}", 
+            use_container_width=True,
+            on_click=set_query,
+            args=(ex,)
+        )
 
 # 提交按钮
 if query:
