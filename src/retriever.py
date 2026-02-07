@@ -17,21 +17,29 @@ class TextRetriever:
         self._load_data()
     
     def _load_data(self):
-        """加载索引数据，支持分块文件合并"""
+        """加载索引数据，支持压缩分块文件解压合并"""
         chunks_path = self.data_dir / "chunks.json"
         index_path = self.data_dir / "keyword_index.json"
         
-        # 检查是否有分块文件
-        split_files = sorted(self.data_dir.glob("chunks_part_*"))
+        # 检查是否有压缩的分块文件
+        compressed_files = sorted(self.data_dir.glob("chunks_small_*.gz"))
         
+        if not chunks_path.exists() and compressed_files:
+            print(f"📦 发现 {len(compressed_files)} 个压缩文件，开始解压合并...")
+            self._merge_compressed_files(compressed_files, chunks_path)
+        
+        # 检查是否有未压缩的分块文件（兼容旧版本）
+        split_files = sorted(self.data_dir.glob("chunks_part_*"))
         if not chunks_path.exists() and split_files:
-            print(f"发现 {len(split_files)} 个分块文件，正在合并...")
+            print(f"📦 发现 {len(split_files)} 个分块文件，正在合并...")
             self._merge_split_files(split_files, chunks_path)
         
         if not chunks_path.exists():
-            print("索引文件不存在，正在自动构建...")
+            print("📦 索引文件不存在，正在从小说文本构建...")
+            print("⏱️ 这可能需要 1-2 分钟，请耐心等待...")
             self._build_index()
         else:
+            print(f"📖 正在加载索引...")
             with open(chunks_path, 'r', encoding='utf-8') as f:
                 self.chunks = json.load(f)
             
@@ -42,18 +50,55 @@ class TextRetriever:
             # 创建 id 到 chunk 的映射
             self.chunk_map = {chunk['id']: chunk for chunk in self.chunks}
             
-            print(f"加载了 {len(self.chunks)} 个文本块")
+            print(f"✅ 加载了 {len(self.chunks)} 个文本块")
+    
+    def _merge_compressed_files(self, compressed_files: List[Path], output_path: Path):
+        """解压并合并压缩的分块文件"""
+        import gzip
+        import subprocess
+        
+        total_files = len(compressed_files)
+        print(f"🗜️  开始解压 {total_files} 个文件...")
+        
+        # 创建临时目录存放解压后的文件
+        temp_dir = self.data_dir / "temp_chunks"
+        temp_dir.mkdir(exist_ok=True)
+        
+        # 解压每个文件
+        for i, gz_file in enumerate(compressed_files, 1):
+            print(f"  [{i}/{total_files}] 解压 {gz_file.name}...", end=" ")
+            output_file = temp_dir / gz_file.stem  # 去掉 .gz 后缀
+            
+            with gzip.open(gz_file, 'rb') as f_in:
+                with open(output_file, 'wb') as f_out:
+                    f_out.write(f_in.read())
+            
+            print("✅")
+        
+        # 合并所有解压后的文件
+        print(f"📑 合并 {total_files} 个文件...")
+        split_files = sorted(temp_dir.glob("chunks_small_*"))
+        files_str = ' '.join([str(f) for f in split_files])
+        cmd = f"cat {files_str} > {output_path}"
+        subprocess.run(cmd, shell=True, check=True)
+        
+        # 清理临时文件
+        for f in split_files:
+            f.unlink()
+        temp_dir.rmdir()
+        
+        print(f"✅ 解压合并完成: {output_path}")
     
     def _merge_split_files(self, split_files: List[Path], output_path: Path):
         """合并分块文件"""
         import subprocess
         
-        # 使用 cat 命令合并（比 Python 循环更快）
+        print(f"📑 合并 {len(split_files)} 个文件...")
         files_str = ' '.join([str(f) for f in split_files])
         cmd = f"cat {files_str} > {output_path}"
         subprocess.run(cmd, shell=True, check=True)
         
-        print(f"合并完成: {output_path}")
+        print(f"✅ 合并完成: {output_path}")
     
     def _build_index(self):
         """自动构建索引"""
