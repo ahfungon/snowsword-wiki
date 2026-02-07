@@ -17,9 +17,16 @@ class TextRetriever:
         self._load_data()
     
     def _load_data(self):
-        """加载索引数据，如果不存在则自动构建"""
+        """加载索引数据，支持分块文件合并"""
         chunks_path = self.data_dir / "chunks.json"
         index_path = self.data_dir / "keyword_index.json"
+        
+        # 检查是否有分块文件
+        split_files = sorted(self.data_dir.glob("chunks_part_*"))
+        
+        if not chunks_path.exists() and split_files:
+            print(f"发现 {len(split_files)} 个分块文件，正在合并...")
+            self._merge_split_files(split_files, chunks_path)
         
         if not chunks_path.exists():
             print("索引文件不存在，正在自动构建...")
@@ -36,6 +43,17 @@ class TextRetriever:
             self.chunk_map = {chunk['id']: chunk for chunk in self.chunks}
             
             print(f"加载了 {len(self.chunks)} 个文本块")
+    
+    def _merge_split_files(self, split_files: List[Path], output_path: Path):
+        """合并分块文件"""
+        import subprocess
+        
+        # 使用 cat 命令合并（比 Python 循环更快）
+        files_str = ' '.join([str(f) for f in split_files])
+        cmd = f"cat {files_str} > {output_path}"
+        subprocess.run(cmd, shell=True, check=True)
+        
+        print(f"合并完成: {output_path}")
     
     def _build_index(self):
         """自动构建索引"""
