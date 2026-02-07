@@ -1,0 +1,29 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.ipynb_checkpoints/
+.pytest_cache/
+.coverage
+htmlcov/
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# 数据文件（可选：如果不想提交大文件到Git）
+# data/雪中悍刀行.txt
+data/chunks.json
+data/keyword_index.json
+
+# Streamlit
+.streamlit/secrets.toml
