@@ -1,5 +1,6 @@
 """
-Streamlit 主应用
+雪中悍刀行 - 专家级智能百科 V2
+整合语义检索、知识图谱、深度分析
 """
 
 import streamlit as st
@@ -10,12 +11,11 @@ from pathlib import Path
 # 添加 src 到路径
 sys.path.append(str(Path(__file__).parent))
 
-from src.retriever import TextRetriever
-from src.chat import DeepSeekChat
+from src.expert_system_v2 import ExpertSystemV2
 
 # 页面配置
 st.set_page_config(
-    page_title="雪中悍刀行 - 智能百科",
+    page_title="雪中悍刀行 - 专家级百科",
     page_icon="📚",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -24,183 +24,236 @@ st.set_page_config(
 # 自定义样式
 st.markdown("""
 <style>
-    .main {
-        padding: 2rem;
-    }
-    .stTextInput > div > div > input {
-        font-size: 16px;
-    }
+    .main { padding: 2rem; }
+    .header-text { text-align: center; color: #1f1f1f; }
+    .subtitle { text-align: center; color: #666; margin-bottom: 1rem; }
     .answer-box {
-        background-color: #f0f2f6;
-        padding: 20px;
-        border-radius: 10px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        padding: 25px;
+        border-radius: 12px;
         border-left: 5px solid #ff4b4b;
+        margin: 20px 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    .source-box {
-        background-color: #fafafa;
+    .section-fact { 
+        border-left: 4px solid #3498db; 
+        padding-left: 15px; 
+        margin: 15px 0;
+        background: rgba(52, 152, 219, 0.1);
+        padding: 10px 10px 10px 20px;
+        border-radius: 0 8px 8px 0;
+    }
+    .section-analysis { 
+        border-left: 4px solid #e74c3c; 
+        padding-left: 15px; 
+        margin: 15px 0;
+        background: rgba(231, 76, 60, 0.1);
+        padding: 10px 10px 10px 20px;
+        border-radius: 0 8px 8px 0;
+    }
+    .section-sublime { 
+        border-left: 4px solid #9b59b6; 
+        padding-left: 15px; 
+        margin: 15px 0;
+        background: rgba(155, 89, 182, 0.1);
+        padding: 10px 10px 10px 20px;
+        border-radius: 0 8px 8px 0;
+    }
+    .feature-badge {
+        display: inline-block;
+        background: #e3f2fd;
+        color: #1976d2;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        margin: 0 5px 5px 0;
+    }
+    .stats-card {
+        background: #fff;
         padding: 15px;
         border-radius: 8px;
         border: 1px solid #e0e0e0;
-        font-size: 14px;
-        color: #666;
-    }
-    .header-text {
         text-align: center;
-        color: #1f1f1f;
     }
-    .subtitle {
-        text-align: center;
-        color: #666;
-        margin-bottom: 2rem;
-    }
+    .stats-number { font-size: 24px; font-weight: bold; color: #ff4b4b; }
+    .stats-label { font-size: 12px; color: #666; }
 </style>
 """, unsafe_allow_html=True)
 
+# 初始化专家系统（缓存）
 @st.cache_resource
-def load_retriever():
-    """缓存检索器，支持自动解压和构建索引"""
+def get_expert_system():
+    """初始化专家系统（只加载一次）"""
     try:
-        return TextRetriever()
-    except FileNotFoundError as e:
-        st.error(f"加载索引失败: {e}")
-        return None
-    except Exception as e:
-        st.error(f"加载索引失败: {e}")
-        return None
-
-@st.cache_resource
-def load_chat():
-    """缓存 Chat 客户端"""
-    try:
-        api_key = st.secrets.get("DEEPSEEK_API_KEY") or os.getenv("DEEPSEEK_API_KEY")
+        api_key = os.getenv("DEEPSEEK_API_KEY")
+        if not api_key:
+            # 尝试从 secrets 读取
+            try:
+                api_key = st.secrets.get("DEEPSEEK_API_KEY")
+            except:
+                pass
+        
         if not api_key:
             return None
-        return DeepSeekChat(api_key)
+        
+        with st.spinner("📦 正在加载知识库..."):
+            return ExpertSystemV2(data_dir="data", api_key=api_key)
     except Exception as e:
-        st.error(f"初始化 DeepSeek 失败: {e}")
+        st.error(f"❌ 加载失败: {e}")
         return None
 
-def main():
-    # 标题
-    st.markdown("<h1 class='header-text'>📚 雪中悍刀行 · 智能百科</h1>", unsafe_allow_html=True)
-    st.markdown("<p class='subtitle'>基于小说原文的精准问答系统 | 零幻觉 · 可追溯</p>", unsafe_allow_html=True)
-    
-    # 初始化
-    retriever = load_retriever()
-    
-    # 检查 API Key（优先从环境变量读取，避免 secrets.toml 解析错误）
-    api_key = os.getenv("DEEPSEEK_API_KEY")
-    
-    # 如果环境变量没有，再尝试从 secrets 读取（用于 Streamlit Cloud）
-    if not api_key:
-        try:
-            api_key = st.secrets.get("DEEPSEEK_API_KEY")
-        except Exception:
-            api_key = None
-    
-    if not api_key:
-        st.warning("⚠️ 请配置 DeepSeek API Key")
-        with st.expander("如何配置 API Key"):
-            st.markdown("""
-            **本地运行：**
-            ```bash
-            export DEEPSEEK_API_KEY="your-api-key"
-            streamlit run app.py
-            ```
-            
-            **Streamlit Cloud：**
-            1. 点击右上角 "⋮" → Settings
-            2. 选择 Secrets
-            3. 添加：`DEEPSEEK_API_KEY = "your-api-key"`
-            """)
-        return
-    
-    chat = load_chat()
-    
-    if not retriever:
-        st.error("❌ 数据索引加载失败，请确认已运行 indexer.py 构建索引")
-        return
-    
-    # 侧边栏 - 搜索设置
-    with st.sidebar:
-        st.header("⚙️ 设置")
-        
-        top_k = st.slider("检索段落数", min_value=1, max_value=10, value=5, 
-                         help="检索多少个相关段落作为回答依据")
-        
-        temperature = st.slider("回答创造性", min_value=0.0, max_value=1.0, value=0.3,
-                               help="越低越严格基于原文，越高越灵活")
-        
-        st.divider()
-        
-        st.header("📊 系统状态")
-        st.write(f"索引块数: {len(retriever.chunks)}")
-        st.write(f"关键词数: {len(retriever.keyword_index)}")
-        
-        st.divider()
-        
-        st.header("💡 示例问题")
-        examples = [
-            "徐凤年是谁？",
-            "黄蛮儿有什么特殊能力？",
-            "北凉王府在哪里？",
-            "徐骁有几个孩子？",
-            "龙虎山是什么地方？"
-        ]
-        
-        for ex in examples:
-            if st.button(ex, key=f"ex_{ex}"):
-                st.session_state.query = ex
-                st.rerun()
-    
-    # 主界面 - 搜索框
-    query = st.text_input(
-        "输入你的问题",
-        value=st.session_state.get("query", ""),
-        placeholder="例如：徐凤年是谁？北凉王府在哪里？",
-        key="query_input"
-    )
-    
-    if query:
-        # 显示进度
-        with st.spinner("🔍 正在检索相关内容..."):
-            results = retriever.retrieve(query, top_k=top_k)
-            context = retriever.get_context(query, top_k=top_k)
-        
-        if not results:
-            st.warning("😕 未找到相关内容，请尝试其他关键词")
-            return
-        
-        # 生成回答
-        st.markdown("### 🤖 AI 回答")
-        
-        answer_container = st.container()
-        
-        with st.spinner("🤖 正在生成回答..."):
-            # 使用流式输出
-            answer_text = ""
-            answer_placeholder = answer_container.empty()
-            
-            for chunk in chat.chat_stream(query, context, temperature=temperature):
-                answer_text += chunk
-                answer_placeholder.markdown(f"<div class='answer-box'>{answer_text}</div>", 
-                                          unsafe_allow_html=True)
-        
-        # 显示来源
-        with st.expander("📖 查看原文出处", expanded=False):
-            for i, result in enumerate(results, 1):
-                st.markdown(f"""
-                <div class='source-box'>
-                <strong>参考 {i} - {result['chapter']}</strong> (相关度: {result['relevance_score']})<br>
-                {result['content'][:400]}{'...' if len(result['content']) > 400 else ''}
-                </div>
-                """, unsafe_allow_html=True)
-                st.write("")
-        
-        # Token 使用信息（调试用）
-        # result = chat.chat(query, context, temperature=temperature)
-        # if result["success"]:
-        #     st.caption(f"Token 使用: {result['usage']['total_tokens']} (提示: {result['usage']['prompt_tokens']}, 生成: {result['usage']['completion_tokens']})")
+# 标题
+st.markdown("<h1 class='header-text'>📚 雪中悍刀行 · 专家级百科</h1>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>深度解读这部江湖 | 专家视角 · 文学评论 · 可溯源</p>", unsafe_allow_html=True)
 
-if __name__ == "__main__":
-    main()
+# 功能标签
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.markdown("""
+    <div style="text-align: center; margin-bottom: 20px;">
+        <span class="feature-badge">🔍 语义检索</span>
+        <span class="feature-badge">🕸️ 知识图谱</span>
+        <span class="feature-badge">📖 原文溯源</span>
+        <span class="feature-badge">🎭 深度解读</span>
+    </div>
+    """, unsafe_allow_html=True)
+
+# 数据展示
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+    st.markdown("""
+    <div class="stats-card">
+        <div class="stats-number">12,378</div>
+        <div class="stats-label">原文段落</div>
+    </div>
+    """, unsafe_allow_html=True)
+with col2:
+    st.markdown("""
+    <div class="stats-card">
+        <div class="stats-number">10,820</div>
+        <div class="stats-label">实体记录</div>
+    </div>
+    """, unsafe_allow_html=True)
+with col3:
+    st.markdown("""
+    <div class="stats-card">
+        <div class="stats-number">2,236</div>
+        <div class="stats-label">关键事件</div>
+    </div>
+    """, unsafe_allow_html=True)
+with col4:
+    st.markdown("""
+    <div class="stats-card">
+        <div class="stats-number">14</div>
+        <div class="stats-label">核心人物</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("---")
+
+# 初始化专家系统
+system = get_expert_system()
+
+# API Key 检查
+if not system:
+    st.warning("⚠️ 请配置 DeepSeek API Key")
+    with st.expander("如何配置"):
+        st.markdown("""
+        在 Streamlit Cloud 的 Advanced Settings 中添加：
+        - **Key**: `DEEPSEEK_API_KEY`
+        - **Value**: `sk-...`
+        """)
+    st.stop()
+
+# 搜索框
+query = st.text_input(
+    "💭 提出一个关于《雪中悍刀行》的深度问题",
+    placeholder="例如：徐凤年为什么要杀韩貂寺？这对他意味着什么？",
+    key="query_input"
+)
+
+# 示例问题
+if not query:
+    st.caption("💡 试试这些深度问题：")
+    example_cols = st.columns(3)
+    examples = [
+        "徐凤年为什么要杀韩貂寺？",
+        "王仙芝为什么自称天下第二？",
+        "李淳罡为什么被困听潮阁？",
+        "姜泥和徐凤年的结局是什么？",
+        "徐凤年的武道成长经历了哪些阶段？",
+        "北凉和北莽的冲突根源是什么？"
+    ]
+    for i, ex in enumerate(examples):
+        if example_cols[i % 3].button(ex, key=f"ex_{i}", use_container_width=True):
+            st.session_state.query_input = ex
+            st.rerun()
+
+# 提交按钮
+if query:
+    if st.button("🔍 深度分析", type="primary", use_container_width=True):
+        with st.spinner("🤔 专家正在分析..."):
+            try:
+                # 生成回答
+                result = system.answer(query)
+                
+                if result.get("success"):
+                    # 显示回答
+                    st.markdown("<div class='answer-box'>", unsafe_allow_html=True)
+                    
+                    # 解析三段式回答
+                    answer = result['answer']
+                    
+                    # 处理不同格式的回答
+                    if "**【" in answer:
+                        # 标准三段式
+                        sections = answer.split("**【")
+                        for section in sections:
+                            if section.strip():
+                                if "事实层】**" in section:
+                                    st.markdown("""
+                                    <div class="section-fact">
+                                        <h4 style="color: #3498db; margin-bottom: 10px;">📖 事实层</h4>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                                    st.markdown(section.replace("事实层】**", "").strip())
+                                elif "分析层】**" in section:
+                                    st.markdown("""
+                                    <div class="section-analysis">
+                                        <h4 style="color: #e74c3c; margin-bottom: 10px;">🔍 分析层</h4>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                                    st.markdown(section.replace("分析层】**", "").strip())
+                                elif "升华层】**" in section:
+                                    st.markdown("""
+                                    <div class="section-sublime">
+                                        <h4 style="color: #9b59b6; margin-bottom: 10px;">✨ 升华层</h4>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                                    st.markdown(section.replace("升华层】**", "").strip())
+                    else:
+                        # 非标准格式，直接显示
+                        st.markdown(answer)
+                    
+                    st.markdown("</div>", unsafe_allow_html=True)
+                    
+                    # 显示参考来源
+                    with st.expander("📚 参考来源"):
+                        # 获取检索到的段落
+                        context = system.get_context(query, top_k=3)
+                        st.markdown("**检索到的相关原文：**")
+                        st.markdown(context[:1000] + "...")
+                    
+                    # Token 使用
+                    st.caption(f"💰 Token 使用: {result['usage']['total_tokens']} | 模型: DeepSeek-V3")
+                else:
+                    st.error(f"生成回答失败: {result.get('error', '未知错误')}")
+            
+            except Exception as e:
+                st.error(f"处理失败: {e}")
+                import traceback
+                st.error(traceback.format_exc())
+
+# 页脚
+st.markdown("---")
+st.caption("📌 基于《雪中悍刀行》全文构建 | 使用 DeepSeek AI 驱动 | 专家级文学分析")
