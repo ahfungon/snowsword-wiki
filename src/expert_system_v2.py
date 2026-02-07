@@ -8,6 +8,10 @@ import json
 from pathlib import Path
 from typing import List, Dict
 import logging
+import sys
+
+# 添加 src 到路径
+sys.path.append(str(Path(__file__).parent))
 
 from lightweight_retriever import LightweightRetriever
 from expert_ai_v2 import ExpertAIV2
