@@ -17,24 +17,77 @@ class TextRetriever:
         self._load_data()
     
     def _load_data(self):
-        """加载索引数据"""
+        """加载索引数据，如果不存在则自动构建"""
         chunks_path = self.data_dir / "chunks.json"
         index_path = self.data_dir / "keyword_index.json"
         
         if not chunks_path.exists():
-            raise FileNotFoundError(f"找不到索引文件: {chunks_path}，请先运行 indexer.py")
+            print("索引文件不存在，正在自动构建...")
+            self._build_index()
+        else:
+            with open(chunks_path, 'r', encoding='utf-8') as f:
+                self.chunks = json.load(f)
+            
+            if index_path.exists():
+                with open(index_path, 'r', encoding='utf-8') as f:
+                    self.keyword_index = json.load(index_path)
+            
+            # 创建 id 到 chunk 的映射
+            self.chunk_map = {chunk['id']: chunk for chunk in self.chunks}
+            
+            print(f"加载了 {len(self.chunks)} 个文本块")
+    
+    def _build_index(self):
+        """自动构建索引"""
+        from .indexer import TextIndexer
         
-        with open(chunks_path, 'r', encoding='utf-8') as f:
-            self.chunks = json.load(f)
+        text_file = self.data_dir / "雪中悍刀行.txt"
+        if not text_file.exists():
+            raise FileNotFoundError(f"找不到小说文本文件: {text_file}")
         
-        if index_path.exists():
-            with open(index_path, 'r', encoding='utf-8') as f:
-                self.keyword_index = json.load(index_path)
+        print(f"开始构建索引，文本文件: {text_file}")
+        indexer = TextIndexer(chunk_size=800, overlap=100)
         
-        # 创建 id 到 chunk 的映射
+        with open(text_file, 'r', encoding='utf-8') as f:
+            text = f.read()
+        
+        self.chunks = indexer.create_chunks(text)
+        
+        # 保存索引
+        chunks_path = self.data_dir / "chunks.json"
+        with open(chunks_path, 'w', encoding='utf-8') as f:
+            json.dump(self.chunks, f, ensure_ascii=False)
+        
+        # 构建关键词索引
+        self.keyword_index = self._build_keyword_index()
+        index_path = self.data_dir / "keyword_index.json"
+        with open(index_path, 'w', encoding='utf-8') as f:
+            json.dump(self.keyword_index, f, ensure_ascii=False)
+        
+        # 创建映射
         self.chunk_map = {chunk['id']: chunk for chunk in self.chunks}
         
-        print(f"加载了 {len(self.chunks)} 个文本块")
+        print(f"索引构建完成！共 {len(self.chunks)} 个文本块")
+    
+    def _build_keyword_index(self) -> Dict:
+        """构建关键词索引"""
+        from collections import defaultdict
+        
+        index = defaultdict(list)
+        stop_words = {'的', '了', '在', '是', '我', '有', '和', '就', '不', '人', '都', '一', '一个', '上', '也', '很', '到', '说', '要', '去', '你', '会', '着', '没有', '看', '好', '自己', '这', '那', '什么', '怎么', '吗', '呢', '吧'}
+        
+        for chunk in self.chunks:
+            words = jieba.lcut(chunk['content'])
+            for word in words:
+                word = word.strip()
+                if len(word) >= 2 and word not in stop_words:
+                    index[word].append(chunk['id'])
+        
+        # 去重
+        for word in index:
+            index[word] = list(set(index[word]))
+        
+        return dict(index)
     
     def extract_keywords(self, query: str) -> List[str]:
         """
