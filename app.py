@@ -184,6 +184,11 @@ if not query:
         "徐凤年的武道成长经历了哪些阶段？",
         "北凉和北莽的冲突根源是什么？"
     ]
+    
+    # 初始化 session_state
+    if 'query_input' not in st.session_state:
+        st.session_state.query_input = ""
+    
     for i, ex in enumerate(examples):
         if example_cols[i % 3].button(ex, key=f"ex_{i}", use_container_width=True):
             st.session_state.query_input = ex
