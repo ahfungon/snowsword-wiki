@@ -58,9 +58,42 @@ st.markdown("""
 
 @st.cache_resource
 def load_retriever():
-    """缓存检索器"""
+    """缓存检索器，支持自动构建索引"""
     try:
         return TextRetriever()
+    except FileNotFoundError as e:
+        # 索引不存在，尝试自动构建
+        st.info("📦 首次启动，正在构建索引（约需 1-2 分钟）...")
+        try:
+            from src.indexer import TextIndexer
+            import json
+            
+            data_dir = Path("data")
+            text_file = data_dir / "雪中悍刀行.txt"
+            
+            if not text_file.exists():
+                st.error(f"找不到小说文本文件: {text_file}")
+                return None
+            
+            # 构建索引
+            indexer = TextIndexer(chunk_size=800, overlap=100)
+            with open(text_file, 'r', encoding='utf-8') as f:
+                text = f.read()
+            
+            chunks = indexer.create_chunks(text)
+            
+            # 保存索引
+            chunks_path = data_dir / "chunks.json"
+            with open(chunks_path, 'w', encoding='utf-8') as f:
+                json.dump(chunks, f, ensure_ascii=False)
+            
+            st.success(f"✅ 索引构建完成！共 {len(chunks)} 个文本块")
+            
+            # 重新加载
+            return TextRetriever()
+        except Exception as build_error:
+            st.error(f"构建索引失败: {build_error}")
+            return None
     except Exception as e:
         st.error(f"加载索引失败: {e}")
         return None
