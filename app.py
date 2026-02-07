@@ -85,8 +85,15 @@ def main():
     # 初始化
     retriever = load_retriever()
     
-    # 检查 API Key
-    api_key = st.secrets.get("DEEPSEEK_API_KEY") or os.getenv("DEEPSEEK_API_KEY")
+    # 检查 API Key（优先从环境变量读取，避免 secrets.toml 解析错误）
+    api_key = os.getenv("DEEPSEEK_API_KEY")
+    
+    # 如果环境变量没有，再尝试从 secrets 读取（用于 Streamlit Cloud）
+    if not api_key:
+        try:
+            api_key = st.secrets.get("DEEPSEEK_API_KEY")
+        except Exception:
+            api_key = None
     
     if not api_key:
         st.warning("⚠️ 请配置 DeepSeek API Key")
