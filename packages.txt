@@ -1,2 +1,1 @@
-# Streamlit Cloud 系统依赖
 python3-dev
