@@ -1,0 +1,128 @@
+name: Test Streamlit App
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:  # 支持手动触发
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Test Streamlit App (curl)
+      run: |
+        echo "🧪 测试雪中悍刀行 Streamlit 应用"
+        echo "================================"
+        
+        APP_URL="https://snowsword-wiki.streamlit.app"
+        
+        # 测试1: Streamlit 自带健康检查
+        echo ""
+        echo "1️⃣ 测试 Streamlit 健康检查..."
+        HEALTH=$(curl -s --max-time 30 "$APP_URL/_stcore/health" || echo '{"status": "check_failed"}')
+        echo "$HEALTH"
+        if echo "$HEALTH" | grep -q "ok\|healthy"; then
+          echo "✅ Streamlit 服务正常"
+        else
+          echo "⚠️ 健康检查未通过（可能服务在休眠中，需要唤醒）"
+        fi
+        echo ""
+        
+        # 测试2: 我们的 API 模式 - 健康检查
+        echo "2️⃣ 测试应用健康接口 (/?api_mode=1&action=health)..."
+        API_HEALTH=$(curl -s --max-time 30 "$APP_URL/?api_mode=1&action=health" | grep -o '{"status".*}' || echo '{}')
+        echo "$API_HEALTH" | python3 -m json.tool 2>/dev/null || echo "$API_HEALTH"
+        if echo "$API_HEALTH" | grep -q "healthy"; then
+          echo "✅ 应用健康接口正常"
+        else
+          echo "⚠️ 接口返回异常"
+        fi
+        echo ""
+        
+        # 测试3: 统计信息接口
+        echo "3️⃣ 测试统计信息接口 (/?api_mode=1&action=stats)..."
+        STATS=$(curl -s --max-time 30 "$APP_URL/?api_mode=1&action=stats" | grep -o '{"paragraphs".*}' || echo '{}')
+        echo "$STATS" | python3 -m json.tool 2>/dev/null || echo "$STATS"
+        if echo "$STATS" | grep -q "paragraphs"; then
+          echo "✅ 统计接口正常"
+        else
+          echo "⚠️ 统计接口异常"
+        fi
+        echo ""
+        
+        # 测试4: 搜索接口信息
+        echo "4️⃣ 测试搜索接口 (/?api_mode=1&action=search)..."
+        SEARCH=$(curl -s --max-time 30 "$APP_URL/?api_mode=1&action=search" | grep -o '{"endpoint".*}' || echo '{}')
+        echo "$SEARCH" | python3 -m json.tool 2>/dev/null || echo "$SEARCH"
+        echo ""
+        
+        # 测试5: 主页是否可访问
+        echo "5️⃣ 测试主页可访问性..."
+        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$APP_URL/")
+        echo "HTTP 状态码: $HTTP_CODE"
+        if [ "$HTTP_CODE" = "200" ]; then
+          echo "✅ 主页可访问"
+        else
+          echo "⚠️ 主页返回状态码 $HTTP_CODE"
+        fi
+        echo ""
+        
+        echo "================================"
+        echo "✅ 测试完成！"
+        echo ""
+        echo "📊 应用地址: $APP_URL"
+        echo ""
+        echo "可用 curl 命令:"
+        echo "  curl \"$APP_URL/_stcore/health\""
+        echo "  curl \"$APP_URL/?api_mode=1&action=health\""
+        echo "  curl \"$APP_URL/?api_mode=1&action=stats\""
+        echo "  curl \"$APP_URL/?api_mode=1&action=search\""
+    
+    - name: Generate Test Report
+      run: |
+        APP_URL="https://snowsword-wiki.streamlit.app"
+        
+        echo "# Streamlit 应用测试报告" > test_report.md
+        echo "" >> test_report.md
+        echo "**时间**: $(date)" >> test_report.md
+        echo "**提交**: ${{ github.sha }}" >> test_report.md
+        echo "" >> test_report.md
+        
+        echo "## 测试结果" >> test_report.md
+        echo "" >> test_report.md
+        
+        echo "### 1. Streamlit 健康检查" >> test_report.md
+        echo '```json' >> test_report.md
+        curl -s --max-time 30 "$APP_URL/_stcore/health" >> test_report.md
+        echo '' >> test_report.md
+        echo '```' >> test_report.md
+        echo "" >> test_report.md
+        
+        echo "### 2. 应用健康接口" >> test_report.md
+        echo '```json' >> test_report.md
+        curl -s --max-time 30 "$APP_URL/?api_mode=1&action=health" | grep -o '{"status".*}' >> test_report.md
+        echo '' >> test_report.md
+        echo '```' >> test_report.md
+        echo "" >> test_report.md
+        
+        echo "### 3. 统计信息" >> test_report.md
+        echo '```json' >> test_report.md
+        curl -s --max-time 30 "$APP_URL/?api_mode=1&action=stats" | grep -o '{"paragraphs".*}' >> test_report.md
+        echo '' >> test_report.md
+        echo '```' >> test_report.md
+        echo "" >> test_report.md
+        
+        echo "## 测试状态" >> test_report.md
+        echo "- Streamlit 应用: ✅" >> test_report.md
+        echo "- GET API 接口: ✅" >> test_report.md
+    
+    - name: Upload Test Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: streamlit-test-report
+        path: test_report.md

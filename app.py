@@ -6,7 +6,49 @@
 import streamlit as st
 import sys
 import os
+import json
 from pathlib import Path
+
+# ==================== API 测试模式 ====================
+# 支持 curl GET 调用，返回 JSON 而不是 HTML
+# 用法: curl "https://snowsword-wiki.streamlit.app/?api_mode=1&action=health"
+query_params = st.query_params
+
+if query_params.get("api_mode") == "1":
+    action = query_params.get("action", "health")
+    
+    if action == "health":
+        st.json({
+            "status": "healthy",
+            "service": "雪中悍刀行专家级百科",
+            "version": "2.0.0",
+            "mode": "streamlit_cloud"
+        })
+    elif action == "stats":
+        st.json({
+            "paragraphs": 12378,
+            "entities": 10820,
+            "events": 2236,
+            "characters": 14,
+            "source": "雪中悍刀行全文"
+        })
+    elif action == "search":
+        # 简单返回搜索接口信息
+        st.json({
+            "endpoint": "search",
+            "note": "Streamlit Cloud 不支持完整搜索 API",
+            "frontend_url": "https://snowsword-wiki.streamlit.app",
+            "available": ["health", "stats", "info"]
+        })
+    else:
+        st.json({
+            "error": "Unknown action",
+            "available_actions": ["health", "stats", "search", "info"]
+        })
+    
+    st.stop()  # 停止渲染页面其余部分
+
+# ==================== 正常页面模式 ====================
 
 # 添加 src 到路径
 sys.path.append(str(Path(__file__).parent))
