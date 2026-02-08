@@ -18,8 +18,8 @@ jobs:
       run: |
         echo "⏳ 预热 Streamlit 应用（首次访问可能需要 30-60 秒唤醒）..."
         APP_URL="https://snowsword-wiki.streamlit.app"
-        # 先访问一次唤醒服务，忽略结果
-        curl -s --max-time 60 "$APP_URL/" > /dev/null 2>&1 || true
+        # 先访问一次唤醒服务，跟随重定向
+        curl -sL --max-time 60 "$APP_URL/" > /dev/null 2>&1 || true
         echo "等待 15 秒让服务完全启动..."
         sleep 15
     
@@ -33,7 +33,7 @@ jobs:
         # 测试1: Streamlit 自带健康检查
         echo ""
         echo "1️⃣ 测试 Streamlit 健康检查..."
-        HEALTH=$(curl -s --max-time 60 "$APP_URL/_stcore/health" || echo '{"status": "check_failed"}')
+        HEALTH=$(curl -sL --max-time 60 "$APP_URL/_stcore/health" || echo '{"status": "check_failed"}')
         echo "$HEALTH"
         if echo "$HEALTH" | grep -q "ok\|healthy"; then
           echo "✅ Streamlit 服务正常"
@@ -42,9 +42,9 @@ jobs:
         fi
         echo ""
         
-        # 测试2: 我们的 API 模式 - 健康检查
-        echo "2️⃣ 测试应用健康接口 (/?api_mode=1&action=health)..."
-        API_HEALTH=$(curl -s --max-time 60 "$APP_URL/?api_mode=1&action=health" | grep -o '{"status".*}' || echo '{}')
+        # 测试2: 应用健康接口
+        echo "2️⃣ 测试应用健康接口..."
+        API_HEALTH=$(curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=health")
         echo "$API_HEALTH" | python3 -m json.tool 2>/dev/null || echo "$API_HEALTH"
         if echo "$API_HEALTH" | grep -q "healthy"; then
           echo "✅ 应用健康接口正常"
@@ -54,8 +54,8 @@ jobs:
         echo ""
         
         # 测试3: 统计信息接口
-        echo "3️⃣ 测试统计信息接口 (/?api_mode=1&action=stats)..."
-        STATS=$(curl -s --max-time 60 "$APP_URL/?api_mode=1&action=stats" | grep -o '{"paragraphs".*}' || echo '{}')
+        echo "3️⃣ 测试统计信息接口..."
+        STATS=$(curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=stats")
         echo "$STATS" | python3 -m json.tool 2>/dev/null || echo "$STATS"
         if echo "$STATS" | grep -q "paragraphs"; then
           echo "✅ 统计接口正常"
@@ -65,14 +65,16 @@ jobs:
         echo ""
         
         # 测试4: 搜索接口信息
-        echo "4️⃣ 测试搜索接口 (/?api_mode=1&action=search)..."
-        SEARCH=$(curl -s --max-time 60 "$APP_URL/?api_mode=1&action=search" | grep -o '{"endpoint".*}' || echo '{}')
+        echo "4️⃣ 测试搜索接口..."
+        SEARCH=$(curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=search")
         echo "$SEARCH" | python3 -m json.tool 2>/dev/null || echo "$SEARCH"
         echo ""
         
-        # 测试5: 查询接口（检查缓存状态）
-        echo "5️⃣ 测试查询接口 (/?api_mode=1&action=query&q=徐凤年)..."
-        QUERY=$(curl -s --max-time 60 "$APP_URL/?api_mode=1&action=query&q=徐凤年")
+        # 测试5: 查询接口（使用 URL 编码）
+        echo "5️⃣ 测试查询接口..."
+        # 对中文字符进行 URL 编码
+        QUERY_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('徐凤年'))")
+        QUERY=$(curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=query&q=$QUERY_ENCODED")
         echo "$QUERY" | python3 -m json.tool 2>/dev/null || echo "$QUERY"
         if echo "$QUERY" | grep -q "cached"; then
           echo "✅ 查询接口正常"
@@ -81,9 +83,10 @@ jobs:
         fi
         echo ""
         
-        # 测试6: 问答接口（GET 方式）
-        echo "6️⃣ 测试问答接口 (/?api_mode=1&action=ask&q=徐凤年)..."
-        ASK=$(curl -s --max-time 90 "$APP_URL/?api_mode=1&action=ask&q=徐凤年是谁")
+        # 测试6: 问答接口（GET 方式，使用 URL 编码）
+        echo "6️⃣ 测试问答接口..."
+        QUESTION_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('徐凤年是谁'))")
+        ASK=$(curl -sL --max-time 90 "$APP_URL/?api_mode=1&action=ask&q=$QUESTION_ENCODED")
         echo "$ASK" | python3 -m json.tool 2>/dev/null || echo "$ASK"
         if echo "$ASK" | grep -q "success"; then
           echo "✅ 问答接口正常"
@@ -99,7 +102,7 @@ jobs:
         
         # 测试7: 再次询问相同问题（验证缓存）
         echo "7️⃣ 测试缓存（再次询问相同问题）..."
-        ASK2=$(curl -s --max-time 30 "$APP_URL/?api_mode=1&action=ask&q=徐凤年是谁")
+        ASK2=$(curl -sL --max-time 30 "$APP_URL/?api_mode=1&action=ask&q=$QUESTION_ENCODED")
         if echo "$ASK2" | grep -q '"cached":true'; then
           echo "✅ 缓存命中！第二次查询从缓存返回"
         else
@@ -109,7 +112,7 @@ jobs:
         
         # 测试8: 主页是否可访问
         echo "8️⃣ 测试主页可访问性..."
-        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 "$APP_URL/")
+        HTTP_CODE=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 60 "$APP_URL/")
         echo "HTTP 状态码: $HTTP_CODE"
         if [ "$HTTP_CODE" = "200" ]; then
           echo "✅ 主页可访问"
@@ -125,20 +128,20 @@ jobs:
         echo ""
         echo "可用 curl 命令:"
         echo "  # 基础检查"
-        echo "  curl \"$APP_URL/_stcore/health\""
-        echo "  curl \"$APP_URL/?api_mode=1&action=health\""
+        echo "  curl -L \"$APP_URL/_stcore/health\""
+        echo "  curl -L \"$APP_URL/?api_mode=1&action=health\""
         echo ""
         echo "  # 统计信息"
-        echo "  curl \"$APP_URL/?api_mode=1&action=stats\""
+        echo "  curl -L \"$APP_URL/?api_mode=1&action=stats\""
         echo ""
         echo "  # 问答（带缓存）"
-        echo "  curl \"$APP_URL/?api_mode=1&action=ask&q=徐凤年是谁\""
+        echo "  curl -L \"$APP_URL/?api_mode=1&action=ask&q=%E5%BE%90%E5%87%A4%E5%B9%B4\""
         echo ""
         echo "  # 查询缓存状态"
-        echo "  curl \"$APP_URL/?api_mode=1&action=query&q=徐凤年\""
+        echo "  curl -L \"$APP_URL/?api_mode=1&action=query&q=%E5%BE%90%E5%87%A4%E5%B9%B4\""
         echo ""
         echo "  # 清除缓存"
-        echo "  curl \"$APP_URL/?api_mode=1&action=cache_clear\""
+        echo "  curl -L \"$APP_URL/?api_mode=1&action=cache_clear\""
     
     - name: Generate Test Report
       run: |
@@ -155,35 +158,36 @@ jobs:
         
         echo "### 1. Streamlit 健康检查" >> test_report.md
         echo '```' >> test_report.md
-        curl -s --max-time 30 "$APP_URL/_stcore/health" >> test_report.md 2>&1 || echo "请求失败" >> test_report.md
+        curl -sL --max-time 30 "$APP_URL/_stcore/health" >> test_report.md 2>&1 || echo "请求失败" >> test_report.md
         echo '' >> test_report.md
         echo '```' >> test_report.md
         echo "" >> test_report.md
         
         echo "### 2. 应用健康接口" >> test_report.md
         echo '```' >> test_report.md
-        curl -s --max-time 30 "$APP_URL/?api_mode=1&action=health" >> test_report.md 2>&1 || echo "请求失败" >> test_report.md
+        curl -sL --max-time 30 "$APP_URL/?api_mode=1&action=health" >> test_report.md 2>&1 || echo "请求失败" >> test_report.md
         echo '' >> test_report.md
         echo '```' >> test_report.md
         echo "" >> test_report.md
         
         echo "### 3. 统计信息" >> test_report.md
         echo '```' >> test_report.md
-        curl -s --max-time 30 "$APP_URL/?api_mode=1&action=stats" >> test_report.md 2>&1 || echo "请求失败" >> test_report.md
+        curl -sL --max-time 30 "$APP_URL/?api_mode=1&action=stats" >> test_report.md 2>&1 || echo "请求失败" >> test_report.md
         echo '' >> test_report.md
         echo '```' >> test_report.md
         echo "" >> test_report.md
         
         echo "### 4. 问答接口测试" >> test_report.md
         echo '```' >> test_report.md
-        curl -s --max-time 60 "$APP_URL/?api_mode=1&action=ask&q=徐凤年是谁" >> test_report.md 2>&1 || echo "请求失败" >> test_report.md
+        QUESTION_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('徐凤年是谁'))")
+        curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=ask&q=$QUESTION_ENCODED" >> test_report.md 2>&1 || echo "请求失败" >> test_report.md
         echo '' >> test_report.md
         echo '```' >> test_report.md
         echo "" >> test_report.md
         
         echo "### 5. 缓存测试（第二次相同问题）" >> test_report.md
         echo '```' >> test_report.md
-        curl -s --max-time 30 "$APP_URL/?api_mode=1&action=ask&q=徐凤年是谁" >> test_report.md 2>&1 || echo "请求失败" >> test_report.md
+        curl -sL --max-time 30 "$APP_URL/?api_mode=1&action=ask&q=$QUESTION_ENCODED" >> test_report.md 2>&1 || echo "请求失败" >> test_report.md
         echo '' >> test_report.md
         echo '```' >> test_report.md
         echo "" >> test_report.md
@@ -193,7 +197,7 @@ jobs:
         echo "- GET API 接口: ✅" >> test_report.md
         echo "- 问答 API: ✅" >> test_report.md
         echo "- 缓存功能: ✅" >> test_report.md
-      continue-on-error: true  # 即使生成报告失败，也不影响整体测试
+      continue-on-error: true  # 即使生成报告失败，也不影响整体测试通过
     
     - name: Upload Test Report
       uses: actions/upload-artifact@v4
