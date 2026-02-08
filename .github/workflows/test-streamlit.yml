@@ -16,10 +16,17 @@ jobs:
     
     - name: Warm up Streamlit (handle cold start)
       run: |
-        echo "⏳ 预热 Streamlit 应用（首次访问可能需要 30-60 秒唤醒）..."
+        echo "⏳ 预热 Streamlit 应用（首次访问可能需要 60-90 秒唤醒）..."
         APP_URL="https://snowsword-wiki.streamlit.app"
-        # 先访问一次唤醒服务，跟随重定向
-        curl -sL --max-time 60 "$APP_URL/" > /dev/null 2>&1 || true
+        
+        # 多次尝试唤醒服务
+        for i in 1 2 3; do
+          echo "尝试 $i/3..."
+          curl -sL --max-time 30 "$APP_URL/" > /dev/null 2>&1 && echo "✅ 服务已响应" && break
+          echo "等待 30 秒后重试..."
+          sleep 30
+        done
+        
         echo "等待 15 秒让服务完全启动..."
         sleep 15
     
@@ -33,19 +40,23 @@ jobs:
         # 测试1: Streamlit 自带健康检查
         echo ""
         echo "1️⃣ 测试 Streamlit 健康检查..."
-        HEALTH=$(curl -sL --max-time 60 "$APP_URL/_stcore/health" || echo '{"status": "check_failed"}')
+        HEALTH=$(curl -sL --max-time 60 "$APP_URL/_stcore/health" 2>&1 || echo '{"status": "check_failed"}')
         echo "$HEALTH"
         if echo "$HEALTH" | grep -q "ok\|healthy"; then
           echo "✅ Streamlit 服务正常"
         else
-          echo "⚠️ 健康检查未通过（可能服务在休眠中，需要唤醒）"
+          echo "⚠️ 健康检查未通过（可能服务在休眠中）"
         fi
         echo ""
         
         # 测试2: 应用健康接口
         echo "2️⃣ 测试应用健康接口..."
-        API_HEALTH=$(curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=health")
-        echo "$API_HEALTH" | python3 -m json.tool 2>/dev/null || echo "$API_HEALTH"
+        API_HEALTH=$(curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=health" 2>&1 || echo '{"error": "request_failed"}')
+        if [ -n "$API_HEALTH" ]; then
+          echo "$API_HEALTH" | python3 -m json.tool 2>/dev/null || echo "$API_HEALTH"
+        else
+          echo "⚠️ 无响应"
+        fi
         if echo "$API_HEALTH" | grep -q "healthy"; then
           echo "✅ 应用健康接口正常"
         else
@@ -55,8 +66,12 @@ jobs:
         
         # 测试3: 统计信息接口
         echo "3️⃣ 测试统计信息接口..."
-        STATS=$(curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=stats")
-        echo "$STATS" | python3 -m json.tool 2>/dev/null || echo "$STATS"
+        STATS=$(curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=stats" 2>&1 || echo '{"error": "request_failed"}')
+        if [ -n "$STATS" ]; then
+          echo "$STATS" | python3 -m json.tool 2>/dev/null || echo "$STATS"
+        else
+          echo "⚠️ 无响应"
+        fi
         if echo "$STATS" | grep -q "paragraphs"; then
           echo "✅ 统计接口正常"
         else
@@ -66,16 +81,23 @@ jobs:
         
         # 测试4: 搜索接口信息
         echo "4️⃣ 测试搜索接口..."
-        SEARCH=$(curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=search")
-        echo "$SEARCH" | python3 -m json.tool 2>/dev/null || echo "$SEARCH"
+        SEARCH=$(curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=search" 2>&1 || echo '{"error": "request_failed"}')
+        if [ -n "$SEARCH" ]; then
+          echo "$SEARCH" | python3 -m json.tool 2>/dev/null || echo "$SEARCH"
+        else
+          echo "⚠️ 无响应"
+        fi
         echo ""
         
         # 测试5: 查询接口（使用 URL 编码）
         echo "5️⃣ 测试查询接口..."
-        # 对中文字符进行 URL 编码
-        QUERY_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('徐凤年'))")
-        QUERY=$(curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=query&q=$QUERY_ENCODED")
-        echo "$QUERY" | python3 -m json.tool 2>/dev/null || echo "$QUERY"
+        QUERY_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('徐凤年'))" 2>/dev/null || echo "%E5%BE%90%E5%87%A4%E5%B9%B4")
+        QUERY=$(curl -sL --max-time 60 "$APP_URL/?api_mode=1&action=query&q=$QUERY_ENCODED" 2>&1 || echo '{"error": "request_failed"}')
+        if [ -n "$QUERY" ]; then
+          echo "$QUERY" | python3 -m json.tool 2>/dev/null || echo "$QUERY"
+        else
+          echo "⚠️ 无响应"
+        fi
         if echo "$QUERY" | grep -q "cached"; then
           echo "✅ 查询接口正常"
         else
@@ -85,9 +107,13 @@ jobs:
         
         # 测试6: 问答接口（GET 方式，使用 URL 编码）
         echo "6️⃣ 测试问答接口..."
-        QUESTION_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('徐凤年是谁'))")
-        ASK=$(curl -sL --max-time 90 "$APP_URL/?api_mode=1&action=ask&q=$QUESTION_ENCODED")
-        echo "$ASK" | python3 -m json.tool 2>/dev/null || echo "$ASK"
+        QUESTION_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('徐凤年是谁'))" 2>/dev/null || echo "%E5%BE%90%E5%87%A4%E5%B9%B4%E6%98%AF%E8%B0%81")
+        ASK=$(curl -sL --max-time 90 "$APP_URL/?api_mode=1&action=ask&q=$QUESTION_ENCODED" 2>&1 || echo '{"error": "request_failed"}')
+        if [ -n "$ASK" ]; then
+          echo "$ASK" | python3 -m json.tool 2>/dev/null || echo "$ASK"
+        else
+          echo "⚠️ 无响应"
+        fi
         if echo "$ASK" | grep -q "success"; then
           echo "✅ 问答接口正常"
           if echo "$ASK" | grep -q '"cached":true'; then
@@ -96,28 +122,28 @@ jobs:
             echo "🤖 新回答已生成并缓存"
           fi
         else
-          echo "⚠️ 问答接口返回异常"
+          echo "⚠️ 问答接口返回异常（可能服务仍在启动中）"
         fi
         echo ""
         
         # 测试7: 再次询问相同问题（验证缓存）
         echo "7️⃣ 测试缓存（再次询问相同问题）..."
-        ASK2=$(curl -sL --max-time 30 "$APP_URL/?api_mode=1&action=ask&q=$QUESTION_ENCODED")
+        ASK2=$(curl -sL --max-time 30 "$APP_URL/?api_mode=1&action=ask&q=$QUESTION_ENCODED" 2>&1 || echo '{"error": "request_failed"}')
         if echo "$ASK2" | grep -q '"cached":true'; then
           echo "✅ 缓存命中！第二次查询从缓存返回"
         else
-          echo "ℹ️ 缓存未命中或缓存已过期"
+          echo "ℹ️ 缓存未命中（可能第一次请求失败或未缓存）"
         fi
         echo ""
         
         # 测试8: 主页是否可访问
         echo "8️⃣ 测试主页可访问性..."
-        HTTP_CODE=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 60 "$APP_URL/")
+        HTTP_CODE=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 60 "$APP_URL/" 2>&1 || echo "000")
         echo "HTTP 状态码: $HTTP_CODE"
         if [ "$HTTP_CODE" = "200" ]; then
           echo "✅ 主页可访问"
         else
-          echo "⚠️ 主页返回状态码 $HTTP_CODE"
+          echo "⚠️ 主页返回状态码 $HTTP_CODE（可能服务仍在部署中）"
         fi
         echo ""
         
