@@ -14,6 +14,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    - name: Warm up Streamlit (handle cold start)
+      run: |
+        echo "⏳ 预热 Streamlit 应用（首次访问可能需要 30-60 秒唤醒）..."
+        APP_URL="https://snowsword-wiki.streamlit.app"
+        # 先访问一次唤醒服务，忽略结果
+        curl -s --max-time 60 "$APP_URL/" > /dev/null 2>&1 || true
+        echo "等待 15 秒让服务完全启动..."
+        sleep 15
+    
     - name: Test Streamlit App (curl)
       run: |
         echo "🧪 测试雪中悍刀行 Streamlit 应用"
@@ -24,7 +33,7 @@ jobs:
         # 测试1: Streamlit 自带健康检查
         echo ""
         echo "1️⃣ 测试 Streamlit 健康检查..."
-        HEALTH=$(curl -s --max-time 30 "$APP_URL/_stcore/health" || echo '{"status": "check_failed"}')
+        HEALTH=$(curl -s --max-time 60 "$APP_URL/_stcore/health" || echo '{"status": "check_failed"}')
         echo "$HEALTH"
         if echo "$HEALTH" | grep -q "ok\|healthy"; then
           echo "✅ Streamlit 服务正常"
@@ -35,7 +44,7 @@ jobs:
         
         # 测试2: 我们的 API 模式 - 健康检查
         echo "2️⃣ 测试应用健康接口 (/?api_mode=1&action=health)..."
-        API_HEALTH=$(curl -s --max-time 30 "$APP_URL/?api_mode=1&action=health" | grep -o '{"status".*}' || echo '{}')
+        API_HEALTH=$(curl -s --max-time 60 "$APP_URL/?api_mode=1&action=health" | grep -o '{"status".*}' || echo '{}')
         echo "$API_HEALTH" | python3 -m json.tool 2>/dev/null || echo "$API_HEALTH"
         if echo "$API_HEALTH" | grep -q "healthy"; then
           echo "✅ 应用健康接口正常"
@@ -46,7 +55,7 @@ jobs:
         
         # 测试3: 统计信息接口
         echo "3️⃣ 测试统计信息接口 (/?api_mode=1&action=stats)..."
-        STATS=$(curl -s --max-time 30 "$APP_URL/?api_mode=1&action=stats" | grep -o '{"paragraphs".*}' || echo '{}')
+        STATS=$(curl -s --max-time 60 "$APP_URL/?api_mode=1&action=stats" | grep -o '{"paragraphs".*}' || echo '{}')
         echo "$STATS" | python3 -m json.tool 2>/dev/null || echo "$STATS"
         if echo "$STATS" | grep -q "paragraphs"; then
           echo "✅ 统计接口正常"
@@ -57,13 +66,13 @@ jobs:
         
         # 测试4: 搜索接口信息
         echo "4️⃣ 测试搜索接口 (/?api_mode=1&action=search)..."
-        SEARCH=$(curl -s --max-time 30 "$APP_URL/?api_mode=1&action=search" | grep -o '{"endpoint".*}' || echo '{}')
+        SEARCH=$(curl -s --max-time 60 "$APP_URL/?api_mode=1&action=search" | grep -o '{"endpoint".*}' || echo '{}')
         echo "$SEARCH" | python3 -m json.tool 2>/dev/null || echo "$SEARCH"
         echo ""
         
         # 测试5: 主页是否可访问
         echo "5️⃣ 测试主页可访问性..."
-        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$APP_URL/")
+        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 "$APP_URL/")
         echo "HTTP 状态码: $HTTP_CODE"
         if [ "$HTTP_CODE" = "200" ]; then
           echo "✅ 主页可访问"
@@ -98,21 +107,21 @@ jobs:
         
         echo "### 1. Streamlit 健康检查" >> test_report.md
         echo '```json' >> test_report.md
-        curl -s --max-time 30 "$APP_URL/_stcore/health" >> test_report.md
+        curl -s --max-time 60 "$APP_URL/_stcore/health" >> test_report.md
         echo '' >> test_report.md
         echo '```' >> test_report.md
         echo "" >> test_report.md
         
         echo "### 2. 应用健康接口" >> test_report.md
         echo '```json' >> test_report.md
-        curl -s --max-time 30 "$APP_URL/?api_mode=1&action=health" | grep -o '{"status".*}' >> test_report.md
+        curl -s --max-time 60 "$APP_URL/?api_mode=1&action=health" | grep -o '{"status".*}' >> test_report.md
         echo '' >> test_report.md
         echo '```' >> test_report.md
         echo "" >> test_report.md
         
         echo "### 3. 统计信息" >> test_report.md
         echo '```json' >> test_report.md
-        curl -s --max-time 30 "$APP_URL/?api_mode=1&action=stats" | grep -o '{"paragraphs".*}' >> test_report.md
+        curl -s --max-time 60 "$APP_URL/?api_mode=1&action=stats" | grep -o '{"paragraphs".*}' >> test_report.md
         echo '' >> test_report.md
         echo '```' >> test_report.md
         echo "" >> test_report.md
