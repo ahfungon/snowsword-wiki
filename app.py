@@ -122,77 +122,47 @@ if query_params.get("api_mode") == "1":
                 })
     
     elif action == "ask":
-        # POST 方式获取完整回答（支持缓存）
-        try:
-            # 尝试从 POST body 读取
-            import streamlit.runtime.scriptrunner.script_run_context as context
-            from streamlit.runtime.scriptrunner import get_script_run_ctx
-            
-            # 尝试读取 POST 数据
-            try:
-                post_data = st.request_body() if hasattr(st, 'request_body') else None
-            except:
-                post_data = None
-            
-            # 如果没有 POST 数据，尝试从查询参数读取
-            if not post_data:
-                q = query_params.get("q", "")
-                temp = float(query_params.get("temp", 0.7))
-            else:
-                data = json.loads(post_data)
-                q = data.get("query", "")
-                temp = data.get("temperature", 0.7)
-            
-            if not q:
+        # GET 方式获取回答（简化版，不加载专家系统以避免超时）
+        q = query_params.get("q", "")
+        temp = float(query_params.get("temp", 0.7))
+        
+        if not q:
+            st.json({
+                "error": "Missing parameter 'q'",
+                "example": "?api_mode=1&action=ask&q=徐凤年是谁"
+            })
+        else:
+            # 检查缓存
+            cached = _get_cached_answer(q, temp)
+            if cached:
                 st.json({
-                    "error": "Missing query",
-                    "usage": "POST with JSON body: {\"query\":\"你的问题\",\"temperature\":0.7}"
+                    "success": True,
+                    "query": q,
+                    "cached": True,
+                    "answer": cached.get("answer"),
+                    "usage": cached.get("usage", {}),
+                    "note": "此回答来自缓存"
                 })
             else:
-                # 检查缓存
-                cached = _get_cached_answer(q, temp)
-                if cached:
-                    st.json({
-                        "success": True,
-                        "query": q,
-                        "cached": True,
-                        "answer": cached.get("answer"),
-                        "usage": cached.get("usage", {}),
-                        "note": "此回答来自缓存"
-                    })
-                else:
-                    # 初始化专家系统并获取回答
-                    try:
-                        api_key = os.getenv("DEEPSEEK_API_KEY") or st.secrets.get("DEEPSEEK_API_KEY")
-                        system = ExpertSystemV2(data_dir="data", api_key=api_key)
-                        result = system.answer(q, temperature=temp)
-                        
-                        if result.get("success"):
-                            # 缓存回答
-                            _set_cached_answer(q, temp, result)
-                            
-                            st.json({
-                                "success": True,
-                                "query": q,
-                                "cached": False,
-                                "answer": result.get("answer"),
-                                "usage": result.get("usage", {}),
-                                "cached_total": len(_answer_cache)
-                            })
-                        else:
-                            st.json({
-                                "success": False,
-                                "query": q,
-                                "error": result.get("error", "Unknown error")
-                            })
-                    except Exception as e:
-                        st.json({
-                            "success": False,
-                            "query": q,
-                            "error": str(e)
-                        })
-        except Exception as e:
-            st.json({"error": f"Request processing failed: {str(e)}"})
+                # 简化版：返回提示信息，避免在 Streamlit Cloud 上初始化重型系统
+                mock_answer = f"这是一个简化版回答。您的问题是：{q}\n\n在实际应用中，这里会调用 DeepSeek AI 生成详细回答。由于 Streamlit Cloud 资源限制，请使用前端界面进行完整问答。"
+                result = {
+                    "success": True,
+                    "answer": mock_answer,
+                    "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
+                }
+                # 缓存这个简化回答
+                _set_cached_answer(q, temp, result)
+                
+                st.json({
+                    "success": True,
+                    "query": q,
+                    "cached": False,
+                    "answer": result.get("answer"),
+                    "usage": result.get("usage"),
+                    "cached_total": len(_answer_cache),
+                    "note": "此为简化版回答，请使用前端获取完整 AI 回答"
+                })
     
     elif action == "cache_clear":
         # 清除缓存
