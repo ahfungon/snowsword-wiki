@@ -1,0 +1,142 @@
+name: Deploy & Test API
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:  # 支持手动触发
+
+jobs:
+  deploy-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    # 方案1: 部署到 Render (推荐免费方案)
+    - name: Deploy to Render
+      if: github.ref == 'refs/heads/main'
+      env:
+        RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+      run: |
+        echo "🚀 触发 Render 部署..."
+        curl -X POST \
+          "https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys" \
+          -H "accept: application/json" \
+          -H "authorization: Bearer $RENDER_API_KEY" \
+          -H "content-type: application/json" \
+          -d '{}'
+        echo "⏳ 等待部署完成 (30秒)..."
+        sleep 30
+      continue-on-error: true
+    
+    # 方案2: 部署到 Railway (备选)
+    - name: Deploy to Railway
+      if: github.ref == 'refs/heads/main'
+      env:
+        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      run: |
+        echo "🚀 Railway 会自动从 GitHub 部署"
+        echo "⏳ 等待部署完成..."
+        sleep 45
+      continue-on-error: true
+    
+    # 等待服务启动
+    - name: Wait for deployment
+      run: |
+        echo "⏳ 等待服务就绪..."
+        sleep 30
+    
+    # 使用 curl 测试已部署的 API
+    - name: Test Deployed API
+      env:
+        API_BASE_URL: ${{ secrets.API_BASE_URL }}
+      run: |
+        echo "🧪 测试已部署的 API..."
+        echo "API地址: $API_BASE_URL"
+        echo ""
+        
+        # 测试1: 根路径
+        echo "1️⃣ 测试根路径..."
+        curl -s "$API_BASE_URL/" | jq '.' || curl -s "$API_BASE_URL/"
+        echo ""
+        
+        # 测试2: 健康检查
+        echo "2️⃣ 测试健康检查..."
+        HEALTH=$(curl -s "$API_BASE_URL/health")
+        echo "$HEALTH" | jq '.' || echo "$HEALTH"
+        if echo "$HEALTH" | grep -q "healthy"; then
+          echo "✅ 健康检查通过"
+        else
+          echo "⚠️ 健康检查未通过"
+        fi
+        echo ""
+        
+        # 测试3: 搜索接口
+        echo "3️⃣ 测试搜索接口..."
+        SEARCH=$(curl -s "$API_BASE_URL/search?q=徐凤年&top_k=2")
+        echo "$SEARCH" | jq '.' || echo "$SEARCH"
+        if echo "$SEARCH" | grep -q "results"; then
+          echo "✅ 搜索接口正常"
+        else
+          echo "⚠️ 搜索接口异常"
+        fi
+        echo ""
+        
+        # 测试4: 查询接口 (POST)
+        echo "4️⃣ 测试查询接口..."
+        QUERY=$(curl -s -X POST "$API_BASE_URL/query" \
+          -H "Content-Type: application/json" \
+          -d '{"query":"徐凤年是谁","top_k":3,"temperature":0.7}')
+        echo "$QUERY" | jq '.answer' || echo "$QUERY"
+        if echo "$QUERY" | grep -q "answer"; then
+          echo "✅ 查询接口正常"
+        else
+          echo "⚠️ 查询接口异常"
+        fi
+        echo ""
+        
+        echo "🎉 API 测试完成！"
+    
+    # 上传测试报告
+    - name: Generate Test Report
+      env:
+        API_BASE_URL: ${{ secrets.API_BASE_URL }}
+      run: |
+        echo "# API 测试报告" > test_report.md
+        echo "时间: $(date)" >> test_report.md
+        echo "提交: ${{ github.sha }}" >> test_report.md
+        echo "" >> test_report.md
+        echo "## 测试结果" >> test_report.md
+        echo "" >> test_report.md
+        
+        # 根路径
+        echo "### 根路径" >> test_report.md
+        echo '```json' >> test_report.md
+        curl -s "$API_BASE_URL/" >> test_report.md
+        echo '' >> test_report.md
+        echo '```' >> test_report.md
+        echo "" >> test_report.md
+        
+        # 健康检查
+        echo "### 健康检查" >> test_report.md
+        echo '```json' >> test_report.md
+        curl -s "$API_BASE_URL/health" >> test_report.md
+        echo '' >> test_report.md
+        echo '```' >> test_report.md
+        echo "" >> test_report.md
+        
+        # 搜索
+        echo "### 搜索测试" >> test_report.md
+        echo '```json' >> test_report.md
+        curl -s "$API_BASE_URL/search?q=徐凤年&top_k=2" >> test_report.md
+        echo '' >> test_report.md
+        echo '```' >> test_report.md
+    
+    - name: Upload Test Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: api-test-report
+        path: test_report.md

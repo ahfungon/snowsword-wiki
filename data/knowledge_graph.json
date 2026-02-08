@@ -1,0 +1,195 @@
+{
+  "characters": {
+    "徐凤年": {
+      "identity": "北凉王世子",
+      "aliases": [
+        "小年",
+        "世子",
+        "殿下"
+      ],
+      "faction": "北凉",
+      "mentions": 776
+    },
+    "徐骁": {
+      "identity": "北凉王",
+      "aliases": [
+        "人屠",
+        "大将军"
+      ],
+      "faction": "北凉",
+      "mentions": 148
+    },
+    "姜泥": {
+      "identity": "西楚亡国公主",
+      "aliases": [
+        "姜姒",
+        "小泥人"
+      ],
+      "faction": "西楚/北凉",
+      "mentions": 63
+    },
+    "南宫仆射": {
+      "identity": "白狐儿脸",
+      "aliases": [
+        "十九停"
+      ],
+      "faction": "听潮阁",
+      "mentions": 4
+    },
+    "李淳罡": {
+      "identity": "剑神",
+      "aliases": [
+        "老剑神",
+        "青衫剑神"
+      ],
+      "faction": "江湖",
+      "mentions": 2
+    },
+    "邓太阿": {
+      "identity": "桃花剑神",
+      "aliases": [
+        "舅帮帮主"
+      ],
+      "faction": "吴家剑冢",
+      "mentions": 5
+    },
+    "王仙芝": {
+      "identity": "武帝城主",
+      "aliases": [
+        "天下第二"
+      ],
+      "faction": "武帝城",
+      "mentions": 20
+    },
+    "拓跋菩萨": {
+      "identity": "北莽军神",
+      "aliases": [
+        "军神"
+      ],
+      "faction": "北莽",
+      "mentions": 0
+    },
+    "曹长卿": {
+      "identity": "曹官子",
+      "aliases": [
+        "青衣儒圣"
+      ],
+      "faction": "西楚",
+      "mentions": 0
+    },
+    "陈芝豹": {
+      "identity": "北凉兵圣",
+      "aliases": [
+        "白衣兵圣",
+        "小人屠"
+      ],
+      "faction": "北凉/离阳",
+      "mentions": 8
+    }
+  },
+  "factions": {
+    "北凉": {
+      "type": "藩国",
+      "leader": "徐骁/徐凤年",
+      "location": "北凉道"
+    },
+    "离阳": {
+      "type": "王朝",
+      "leader": "皇帝",
+      "location": "太安城"
+    },
+    "北莽": {
+      "type": "王朝",
+      "leader": "女帝",
+      "location": "北莽皇帐"
+    },
+    "西楚": {
+      "type": "亡国",
+      "leader": "曹长卿",
+      "location": "广陵道"
+    },
+    "武帝城": {
+      "type": "武林圣地",
+      "leader": "王仙芝",
+      "location": "武帝城"
+    },
+    "吴家剑冢": {
+      "type": "剑道世家",
+      "leader": "家主",
+      "location": "吴家"
+    },
+    "龙虎山": {
+      "type": "道教圣地",
+      "leader": "天师",
+      "location": "龙虎山"
+    },
+    "两禅寺": {
+      "type": "佛教圣地",
+      "leader": "李当心",
+      "location": "两禅寺"
+    }
+  },
+  "locations": {
+    "清凉山": {
+      "type": "地点",
+      "description": "北凉王府所在地"
+    },
+    "北凉王府": {
+      "type": "府邸",
+      "description": "徐凤年家"
+    },
+    "听潮阁": {
+      "type": "建筑",
+      "description": "藏有天下武功秘籍"
+    },
+    "武帝城": {
+      "type": "城市",
+      "description": "王仙芝镇守，天下第一楼"
+    },
+    "太安城": {
+      "type": "都城",
+      "description": "离阳王朝都城"
+    },
+    "广陵江": {
+      "type": "江河",
+      "description": "徐凤年大阅兵之地"
+    }
+  },
+  "relationships": [
+    {
+      "from": "徐凤年",
+      "to": "徐骁",
+      "relation": "父子"
+    },
+    {
+      "from": "徐凤年",
+      "to": "姜泥",
+      "relation": "夫妻/青梅竹马"
+    },
+    {
+      "from": "徐凤年",
+      "to": "南宫仆射",
+      "relation": "知己/约定娶她"
+    },
+    {
+      "from": "徐凤年",
+      "to": "李淳罡",
+      "relation": "师徒/忘年交"
+    },
+    {
+      "from": "徐凤年",
+      "to": "邓太阿",
+      "relation": "舅甥"
+    },
+    {
+      "from": "徐凤年",
+      "to": "拓跋菩萨",
+      "relation": "敌对阵营"
+    },
+    {
+      "from": "徐骁",
+      "to": "离阳皇帝",
+      "relation": "君臣/忌惮"
+    }
+  ]
+}
