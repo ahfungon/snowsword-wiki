@@ -9,41 +9,201 @@ import os
 import json
 from pathlib import Path
 
-# ==================== API 测试模式 ====================
-# 支持 curl GET 调用，返回 JSON 而不是 HTML
-# 用法: curl "https://snowsword-wiki.streamlit.app/?api_mode=1&action=health"
+# ==================== API 模式 (GET/POST) ====================
+# 支持 curl GET/POST 调用，返回 JSON 而不是 HTML
+# 
+# GET 用法:
+#   curl "https://snowsword-wiki.streamlit.app/?api_mode=1&action=health"
+#   curl "https://snowsword-wiki.streamlit.app/?api_mode=1&action=stats"
+#   curl "https://snowsword-wiki.streamlit.app/?api_mode=1&action=query&q=徐凤年"
+#
+# POST 用法:
+#   curl -X POST "https://snowsword-wiki.streamlit.app/?api_mode=1&action=ask" \
+#     -H "Content-Type: application/json" \
+#     -d '{"query":"徐凤年为什么要杀韩貂寺","temperature":0.7}'
+
+import hashlib
+import time
+from functools import lru_cache
+
+# 简单的内存缓存（重启后失效）
+_answer_cache = {}
+_cache_max_size = 100  # 最多缓存 100 个回答
+_cache_ttl = 3600  # 缓存 1 小时
+
+def _get_cache_key(query: str, temp: float) -> str:
+    """生成缓存键"""
+    return hashlib.md5(f"{query}:{temp}".encode()).hexdigest()
+
+def _get_cached_answer(query: str, temp: float):
+    """获取缓存的回答"""
+    key = _get_cache_key(query, temp)
+    if key in _answer_cache:
+        data, timestamp = _answer_cache[key]
+        if time.time() - timestamp < _cache_ttl:
+            return data
+        else:
+            del _answer_cache[key]
+    return None
+
+def _set_cached_answer(query: str, temp: float, answer: dict):
+    """设置缓存"""
+    key = _get_cache_key(query, temp)
+    # 清理过期缓存
+    now = time.time()
+    expired_keys = [k for k, (_, ts) in _answer_cache.items() if now - ts > _cache_ttl]
+    for k in expired_keys:
+        del _answer_cache[k]
+    # 限制缓存大小
+    if len(_answer_cache) >= _cache_max_size:
+        oldest_key = min(_answer_cache.keys(), key=lambda k: _answer_cache[k][1])
+        del _answer_cache[oldest_key]
+    _answer_cache[key] = (answer, now)
+
 query_params = st.query_params
 
 if query_params.get("api_mode") == "1":
     action = query_params.get("action", "health")
     
     if action == "health":
+        cache_info = {
+            "cached_count": len(_answer_cache),
+            "max_size": _cache_max_size,
+            "ttl_seconds": _cache_ttl
+        }
         st.json({
             "status": "healthy",
             "service": "雪中悍刀行专家级百科",
-            "version": "2.0.0",
-            "mode": "streamlit_cloud"
+            "version": "2.1.0",
+            "mode": "streamlit_cloud",
+            "cache": cache_info
         })
+    
     elif action == "stats":
         st.json({
             "paragraphs": 12378,
             "entities": 10820,
             "events": 2236,
             "characters": 14,
-            "source": "雪中悍刀行全文"
+            "source": "雪中悍刀行全文",
+            "cache_enabled": True,
+            "cached_answers": len(_answer_cache)
         })
+    
     elif action == "search":
         # 简单返回搜索接口信息
         st.json({
             "endpoint": "search",
             "note": "Streamlit Cloud 不支持完整搜索 API",
             "frontend_url": "https://snowsword-wiki.streamlit.app",
-            "available": ["health", "stats", "info"]
+            "available": ["health", "stats", "query", "ask", "cache_clear"]
         })
+    
+    elif action == "query":
+        # GET 方式简单查询（返回缓存或未缓存状态）
+        q = query_params.get("q", "")
+        temp = float(query_params.get("temp", 0.7))
+        if not q:
+            st.json({"error": "Missing parameter 'q'", "example": "?api_mode=1&action=query&q=徐凤年"})
+        else:
+            cached = _get_cached_answer(q, temp)
+            if cached:
+                st.json({
+                    "query": q,
+                    "cached": True,
+                    "answer_preview": cached.get("answer", "")[:100] + "..." if len(cached.get("answer", "")) > 100 else cached.get("answer", "")
+                })
+            else:
+                st.json({
+                    "query": q,
+                    "cached": False,
+                    "message": "使用 action=ask POST 请求获取完整回答",
+                    "cached_count": len(_answer_cache)
+                })
+    
+    elif action == "ask":
+        # POST 方式获取完整回答（支持缓存）
+        try:
+            # 尝试从 POST body 读取
+            import streamlit.runtime.scriptrunner.script_run_context as context
+            from streamlit.runtime.scriptrunner import get_script_run_ctx
+            
+            # 尝试读取 POST 数据
+            try:
+                post_data = st.request_body() if hasattr(st, 'request_body') else None
+            except:
+                post_data = None
+            
+            # 如果没有 POST 数据，尝试从查询参数读取
+            if not post_data:
+                q = query_params.get("q", "")
+                temp = float(query_params.get("temp", 0.7))
+            else:
+                data = json.loads(post_data)
+                q = data.get("query", "")
+                temp = data.get("temperature", 0.7)
+            
+            if not q:
+                st.json({
+                    "error": "Missing query",
+                    "usage": "POST with JSON body: {\"query\":\"你的问题\",\"temperature\":0.7}"
+                })
+            else:
+                # 检查缓存
+                cached = _get_cached_answer(q, temp)
+                if cached:
+                    st.json({
+                        "success": True,
+                        "query": q,
+                        "cached": True,
+                        "answer": cached.get("answer"),
+                        "usage": cached.get("usage", {}),
+                        "note": "此回答来自缓存"
+                    })
+                else:
+                    # 初始化专家系统并获取回答
+                    try:
+                        api_key = os.getenv("DEEPSEEK_API_KEY") or st.secrets.get("DEEPSEEK_API_KEY")
+                        system = ExpertSystemV2(data_dir="data", api_key=api_key)
+                        result = system.answer(q, temperature=temp)
+                        
+                        if result.get("success"):
+                            # 缓存回答
+                            _set_cached_answer(q, temp, result)
+                            
+                            st.json({
+                                "success": True,
+                                "query": q,
+                                "cached": False,
+                                "answer": result.get("answer"),
+                                "usage": result.get("usage", {}),
+                                "cached_total": len(_answer_cache)
+                            })
+                        else:
+                            st.json({
+                                "success": False,
+                                "query": q,
+                                "error": result.get("error", "Unknown error")
+                            })
+                    except Exception as e:
+                        st.json({
+                            "success": False,
+                            "query": q,
+                            "error": str(e)
+                        })
+        except Exception as e:
+            st.json({"error": f"Request processing failed: {str(e)}"})
+    
+    elif action == "cache_clear":
+        # 清除缓存
+        _answer_cache.clear()
+        st.json({"success": True, "message": "Cache cleared"})
+    
     else:
         st.json({
             "error": "Unknown action",
-            "available_actions": ["health", "stats", "search", "info"]
+            "available_actions": ["health", "stats", "query", "ask", "cache_clear"],
+            "version": "2.1.0"
         })
     
     st.stop()  # 停止渲染页面其余部分

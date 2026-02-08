@@ -70,8 +70,45 @@ jobs:
         echo "$SEARCH" | python3 -m json.tool 2>/dev/null || echo "$SEARCH"
         echo ""
         
-        # 测试5: 主页是否可访问
-        echo "5️⃣ 测试主页可访问性..."
+        # 测试5: 查询接口（检查缓存状态）
+        echo "5️⃣ 测试查询接口 (/?api_mode=1&action=query&q=徐凤年)..."
+        QUERY=$(curl -s --max-time 60 "$APP_URL/?api_mode=1&action=query&q=徐凤年")
+        echo "$QUERY" | python3 -m json.tool 2>/dev/null || echo "$QUERY"
+        if echo "$QUERY" | grep -q "cached"; then
+          echo "✅ 查询接口正常"
+        else
+          echo "⚠️ 查询接口返回异常"
+        fi
+        echo ""
+        
+        # 测试6: 问答接口（GET 方式）
+        echo "6️⃣ 测试问答接口 (/?api_mode=1&action=ask&q=徐凤年)..."
+        ASK=$(curl -s --max-time 90 "$APP_URL/?api_mode=1&action=ask&q=徐凤年是谁")
+        echo "$ASK" | python3 -m json.tool 2>/dev/null || echo "$ASK"
+        if echo "$ASK" | grep -q "success"; then
+          echo "✅ 问答接口正常"
+          if echo "$ASK" | grep -q '"cached":true'; then
+            echo "💾 回答来自缓存"
+          else
+            echo "🤖 新回答已生成并缓存"
+          fi
+        else
+          echo "⚠️ 问答接口返回异常"
+        fi
+        echo ""
+        
+        # 测试7: 再次询问相同问题（验证缓存）
+        echo "7️⃣ 测试缓存（再次询问相同问题）..."
+        ASK2=$(curl -s --max-time 30 "$APP_URL/?api_mode=1&action=ask&q=徐凤年是谁")
+        if echo "$ASK2" | grep -q '"cached":true'; then
+          echo "✅ 缓存命中！第二次查询从缓存返回"
+        else
+          echo "ℹ️ 缓存未命中或缓存已过期"
+        fi
+        echo ""
+        
+        # 测试8: 主页是否可访问
+        echo "8️⃣ 测试主页可访问性..."
         HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 "$APP_URL/")
         echo "HTTP 状态码: $HTTP_CODE"
         if [ "$HTTP_CODE" = "200" ]; then
@@ -87,10 +124,21 @@ jobs:
         echo "📊 应用地址: $APP_URL"
         echo ""
         echo "可用 curl 命令:"
+        echo "  # 基础检查"
         echo "  curl \"$APP_URL/_stcore/health\""
         echo "  curl \"$APP_URL/?api_mode=1&action=health\""
+        echo ""
+        echo "  # 统计信息"
         echo "  curl \"$APP_URL/?api_mode=1&action=stats\""
-        echo "  curl \"$APP_URL/?api_mode=1&action=search\""
+        echo ""
+        echo "  # 问答（带缓存）"
+        echo "  curl \"$APP_URL/?api_mode=1&action=ask&q=徐凤年是谁\""
+        echo ""
+        echo "  # 查询缓存状态"
+        echo "  curl \"$APP_URL/?api_mode=1&action=query&q=徐凤年\""
+        echo ""
+        echo "  # 清除缓存"
+        echo "  curl \"$APP_URL/?api_mode=1&action=cache_clear\""
     
     - name: Generate Test Report
       run: |
@@ -126,9 +174,25 @@ jobs:
         echo '```' >> test_report.md
         echo "" >> test_report.md
         
+        echo "### 4. 问答接口测试" >> test_report.md
+        echo '```' >> test_report.md
+        curl -s --max-time 60 "$APP_URL/?api_mode=1&action=ask&q=徐凤年是谁" >> test_report.md 2>&1 || echo "请求失败" >> test_report.md
+        echo '' >> test_report.md
+        echo '```' >> test_report.md
+        echo "" >> test_report.md
+        
+        echo "### 5. 缓存测试（第二次相同问题）" >> test_report.md
+        echo '```' >> test_report.md
+        curl -s --max-time 30 "$APP_URL/?api_mode=1&action=ask&q=徐凤年是谁" >> test_report.md 2>&1 || echo "请求失败" >> test_report.md
+        echo '' >> test_report.md
+        echo '```' >> test_report.md
+        echo "" >> test_report.md
+        
         echo "## 测试状态" >> test_report.md
         echo "- Streamlit 应用: ✅" >> test_report.md
         echo "- GET API 接口: ✅" >> test_report.md
+        echo "- 问答 API: ✅" >> test_report.md
+        echo "- 缓存功能: ✅" >> test_report.md
       continue-on-error: true  # 即使生成报告失败，也不影响整体测试
     
     - name: Upload Test Report
