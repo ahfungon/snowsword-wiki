@@ -41,15 +41,21 @@ class ExpertAIV2:
         if knowledge_base_path:
             self._load_knowledge(knowledge_base_path)
     
-    def load_semantic_index(self, index_path: Path):
-        """加载语义检索索引"""
+    def load_semantic_index(self, index_path: Path, zhipu_api_key: str = None):
+        """加载语义检索索引（智谱 AI Embedding）"""
         try:
-            from .deepseek_retriever import DeepSeekEmbeddingRetriever
+            from .zhipu_retriever import ZhipuEmbeddingRetriever
             
-            self.retriever = DeepSeekEmbeddingRetriever(api_key=self.api_key)
+            api_key = zhipu_api_key or os.getenv("ZHIPU_API_KEY")
+            if not api_key:
+                logger.warning("⚠️ 未提供智谱 API Key，回退到关键词检索")
+                self.use_semantic = False
+                return
+            
+            self.retriever = ZhipuEmbeddingRetriever(api_key=api_key)
             self.retriever.load_index(index_path)
             self.use_semantic = True
-            logger.info("✅ 语义检索索引加载成功")
+            logger.info("✅ 智谱语义检索索引加载成功")
         except Exception as e:
             logger.warning(f"⚠️ 语义检索索引加载失败: {e}，回退到关键词检索")
             self.use_semantic = False

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-DeepSeek Embedding 语义检索器
-使用 DeepSeek Embedding API 进行向量语义检索
+智谱 AI Embedding 语义检索器
+使用智谱 GLM Embedding API 进行向量语义检索
 """
 
 import os
@@ -9,65 +9,94 @@ import json
 import numpy as np
 from pathlib import Path
 from typing import List, Dict, Optional
-from openai import OpenAI
 import logging
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class DeepSeekEmbeddingRetriever:
+def get_zhipu_embedding(texts: List[str], api_key: str, model: str = "embedding-2") -> List[List[float]]:
     """
-    DeepSeek Embedding 语义检索器
-    - 使用 DeepSeek Embedding API 编码文本
+    调用智谱 AI Embedding API
+    文档: https://open.bigmodel.cn/dev/api#vector
+    """
+    import requests
+    import time
+    
+    url = "https://open.bigmodel.cn/api/paas/v4/embeddings"
+    
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+    
+    # 智谱一次最多 8 条
+    batch_size = 8
+    all_embeddings = []
+    
+    for i in range(0, len(texts), batch_size):
+        batch = texts[i:i+batch_size]
+        
+        payload = {
+            "model": model,
+            "input": batch
+        }
+        
+        try:
+            response = requests.post(url, headers=headers, json=payload, timeout=30)
+            response.raise_for_status()
+            
+            data = response.json()
+            
+            if "data" in data:
+                # 按 index 排序
+                embeddings = sorted(data["data"], key=lambda x: x["index"])
+                all_embeddings.extend([item["embedding"] for item in embeddings])
+                logger.info(f"✅ 批次 {i//batch_size + 1} 成功，{len(batch)} 条")
+            else:
+                logger.error(f"❌ API 返回异常: {data}")
+                raise ValueError(f"API 返回异常: {data}")
+            
+            # 简单限速
+            if i + batch_size < len(texts):
+                time.sleep(0.5)
+                
+        except requests.exceptions.RequestException as e:
+            logger.error(f"❌ 请求失败: {e}")
+            raise
+    
+    return all_embeddings
+
+
+class ZhipuEmbeddingRetriever:
+    """
+    智谱 Embedding 语义检索器
+    - 使用智谱 GLM Embedding API 编码文本
     - 向量相似度检索
     - 语义理解优于 TF-IDF
     """
     
-    def __init__(self, api_key: str = None):
-        self.api_key = api_key or os.getenv("DEEPSEEK_API_KEY")
+    def __init__(self, api_key: str = None, model: str = "embedding-2"):
+        self.api_key = api_key or os.getenv("ZHIPU_API_KEY")
         if not self.api_key:
-            raise ValueError("需要提供 DeepSeek API Key")
+            raise ValueError("需要提供智谱 AI API Key (ZHIPU_API_KEY)")
         
-        self.client = OpenAI(
-            api_key=self.api_key,
-            base_url="https://api.deepseek.com"
-        )
-        self.model = "deepseek-text-embedding"  # DeepSeek Embedding 模型
+        self.model = model  # embedding-2 (1024维) 或 embedding-3 (2048维)
         
         self.embeddings = None
         self.paragraphs = []
         self.metadata = []
         self.dimension = None
     
-    def _get_embedding(self, texts: List[str]) -> List[List[float]]:
-        """调用 DeepSeek Embedding API"""
-        try:
-            response = self.client.embeddings.create(
-                model=self.model,
-                input=texts
-            )
-            return [item.embedding for item in response.data]
-        except Exception as e:
-            logger.error(f"❌ Embedding API 错误: {e}")
-            raise
-    
-    def _get_embedding_batch(self, texts: List[str], batch_size: int = 100) -> List[List[float]]:
-        """批量获取 Embedding（带分批处理）"""
-        all_embeddings = []
-        for i in range(0, len(texts), batch_size):
-            batch = texts[i:i+batch_size]
-            logger.info(f"🔄 编码批次 {i//batch_size + 1}/{(len(texts)-1)//batch_size + 1} ({len(batch)} 条)")
-            embeddings = self._get_embedding(batch)
-            all_embeddings.extend(embeddings)
-        return all_embeddings
-    
     def build_index(self, paragraphs: List[Dict], output_dir: Path):
         """构建向量索引"""
-        logger.info(f"🔨 构建 DeepSeek Embedding 索引，共 {len(paragraphs)} 个段落")
+        logger.info(f"🔨 构建智谱 Embedding 索引，共 {len(paragraphs)} 个段落，模型: {self.model}")
         
-        # 保存段落数据
-        self.paragraphs = paragraphs
+        # 提取文本
+        texts = [p['content'] for p in paragraphs]
+        
+        # 保存段落数据（只保存文本内容）
+        self.paragraphs = texts
         self.metadata = [
             {
                 'idx': i,
@@ -78,12 +107,9 @@ class DeepSeekEmbeddingRetriever:
             for i, p in enumerate(paragraphs)
         ]
         
-        # 提取文本
-        texts = [p['content'] for p in paragraphs]
-        
-        # 获取 Embedding（分批处理）
-        logger.info("🔄 调用 DeepSeek Embedding API...")
-        embeddings_list = self._get_embedding_batch(texts)
+        # 获取 Embedding
+        logger.info("🔄 调用智谱 Embedding API...")
+        embeddings_list = get_zhipu_embedding(texts, self.api_key, self.model)
         self.embeddings = np.array(embeddings_list)
         self.dimension = self.embeddings.shape[1]
         
@@ -108,7 +134,7 @@ class DeepSeekEmbeddingRetriever:
     
     def load_index(self, index_dir: Path):
         """加载索引"""
-        logger.info(f"📂 加载 DeepSeek Embedding 索引: {index_dir}")
+        logger.info(f"📂 加载智谱 Embedding 索引: {index_dir}")
         
         # 加载向量
         self.embeddings = np.load(index_dir / 'embeddings.npy')
@@ -126,8 +152,8 @@ class DeepSeekEmbeddingRetriever:
     def _cosine_similarity(self, query_vec: np.ndarray) -> np.ndarray:
         """计算余弦相似度"""
         # 归一化
-        query_vec = query_vec / np.linalg.norm(query_vec)
-        embeddings_norm = self.embeddings / np.linalg.norm(self.embeddings, axis=1, keepdims=True)
+        query_vec = query_vec / (np.linalg.norm(query_vec) + 1e-8)
+        embeddings_norm = self.embeddings / (np.linalg.norm(self.embeddings, axis=1, keepdims=True) + 1e-8)
         
         # 计算相似度
         similarities = np.dot(embeddings_norm, query_vec)
@@ -141,7 +167,7 @@ class DeepSeekEmbeddingRetriever:
         
         # 编码查询
         logger.info(f"🔍 编码查询: {query[:50]}...")
-        query_embedding = self._get_embedding([query])[0]
+        query_embedding = get_zhipu_embedding([query], self.api_key, self.model)[0]
         query_vec = np.array(query_embedding)
         
         # 计算相似度
@@ -162,12 +188,12 @@ class DeepSeekEmbeddingRetriever:
         
         return results
     
-    def hybrid_search(self, query: str, top_k: int = 5, alpha: float = 0.7) -> List[Dict]:
+    def hybrid_search(self, query: str, top_k: int = 5, alpha: float = 0.8) -> List[Dict]:
         """混合检索：语义 + 关键词"""
         import jieba
         
         # 语义分数
-        query_embedding = self._get_embedding([query])[0]
+        query_embedding = get_zhipu_embedding([query], self.api_key, self.model)[0]
         query_vec = np.array(query_embedding)
         semantic_scores = self._cosine_similarity(query_vec)
         
@@ -204,7 +230,7 @@ class DeepSeekEmbeddingRetriever:
 
 
 if __name__ == "__main__":
-    print("🧪 测试 DeepSeek Embedding 检索器")
+    print("🧪 测试智谱 Embedding 检索器")
     print("="*60)
     
     # 测试数据
@@ -217,15 +243,15 @@ if __name__ == "__main__":
     ]
     
     # 创建检索器
-    api_key = os.getenv("DEEPSEEK_API_KEY")
+    api_key = os.getenv("ZHIPU_API_KEY")
     if not api_key:
-        print("⚠️ 请设置 DEEPSEEK_API_KEY 环境变量")
+        print("⚠️ 请设置 ZHIPU_API_KEY 环境变量")
         exit(1)
     
-    retriever = DeepSeekEmbeddingRetriever(api_key=api_key)
+    retriever = ZhipuEmbeddingRetriever(api_key=api_key)
     
     # 构建索引
-    retriever.build_index(test_paragraphs, Path("test_index_deepseek"))
+    retriever.build_index(test_paragraphs, Path("test_index_zhipu"))
     
     # 测试查询
     queries = [
