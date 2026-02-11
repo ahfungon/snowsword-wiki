@@ -20,23 +20,39 @@ class ExpertAIV2:
     专家级 AI V2
     - 整合知识图谱、事件、原文进行深度分析
     - 三段式回答：事实→分析→升华
+    - 支持 DeepSeek Embedding 语义检索
     """
     
-    def __init__(self, api_key: str = None, knowledge_base_path: Path = None):
+    def __init__(self, api_key: str = None, knowledge_base_path: Path = None, use_semantic: bool = True):
         self.api_key = api_key or os.getenv("DEEPSEEK_API_KEY")
         self.client = OpenAI(
             api_key=self.api_key,
             base_url="https://api.deepseek.com"
         )
         self.model = "deepseek-chat"
+        self.use_semantic = use_semantic  # 是否使用语义检索
         
         # 加载知识库
         self.knowledge_base = {}
         self.events = []
         self.paragraphs = []
+        self.retriever = None  # 语义检索器
         
         if knowledge_base_path:
             self._load_knowledge(knowledge_base_path)
+    
+    def load_semantic_index(self, index_path: Path):
+        """加载语义检索索引"""
+        try:
+            from .deepseek_retriever import DeepSeekEmbeddingRetriever
+            
+            self.retriever = DeepSeekEmbeddingRetriever(api_key=self.api_key)
+            self.retriever.load_index(index_path)
+            self.use_semantic = True
+            logger.info("✅ 语义检索索引加载成功")
+        except Exception as e:
+            logger.warning(f"⚠️ 语义检索索引加载失败: {e}，回退到关键词检索")
+            self.use_semantic = False
     
     def _load_knowledge(self, base_path: Path):
         """加载知识库数据"""
@@ -92,7 +108,7 @@ class ExpertAIV2:
 - 给出简单的道德判断"""
     
     def keyword_search(self, query: str, top_k: int = 5) -> List[Dict]:
-        """关键词检索（临时方案，不依赖语义索引）"""
+        """关键词检索（备用方案）"""
         keywords = set(query.split())
         
         # 在段落中搜索
@@ -114,6 +130,27 @@ class ExpertAIV2:
         # 排序取前K
         scored_paras.sort(key=lambda x: x[1], reverse=True)
         return [p[0] for p in scored_paras[:top_k]]
+    
+    def semantic_search(self, query: str, top_k: int = 5) -> List[Dict]:
+        """语义检索（使用 DeepSeek Embedding）"""
+        if self.retriever is None:
+            logger.warning("⚠️ 语义检索器未加载，回退到关键词检索")
+            return self.keyword_search(query, top_k)
+        
+        try:
+            results = self.retriever.search(query, top_k=top_k)
+            # 转换为统一格式
+            return [
+                {
+                    'content': r['content'],
+                    'chapter': r.get('chapter', '未知'),
+                    'similarity': r.get('similarity', 0)
+                }
+                for r in results
+            ]
+        except Exception as e:
+            logger.error(f"❌ 语义检索失败: {e}")
+            return self.keyword_search(query, top_k)
     
     def build_context(self, query: str) -> str:
         """构建增强上下文"""
@@ -153,10 +190,17 @@ class ExpertAIV2:
                     context_parts.append(f"影响: {event_data.get('impact', '')}")
                     break
         
-        # 4. 添加原文段落（关键词检索）
-        relevant_paras = self.keyword_search(query, top_k=3)
+        # 4. 添加原文段落（优先使用语义检索）
+        if self.use_semantic and self.retriever is not None:
+            logger.info("🔍 使用语义检索查找相关原文...")
+            relevant_paras = self.semantic_search(query, top_k=3)
+            context_parts.append("\n【相关原文 (语义匹配)】")
+        else:
+            logger.info("🔍 使用关键词检索查找相关原文...")
+            relevant_paras = self.keyword_search(query, top_k=3)
+            context_parts.append("\n【相关原文 (关键词匹配)】")
+        
         if relevant_paras:
-            context_parts.append("\n【相关原文】")
             for i, para in enumerate(relevant_paras, 1):
                 context_parts.append(f"\n段落{i} [{para.get('chapter', '未知')}]:")
                 context_parts.append(para['content'][:300])
