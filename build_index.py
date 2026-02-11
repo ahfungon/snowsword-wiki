@@ -8,9 +8,9 @@ from pathlib import Path
 
 sys.path.append('.')
 
-from src.indexer import TextIndexer
+from src.unified_indexer import UnifiedIndexer
 from src.knowledge_graph import KnowledgeGraph
-from src.chapter_summarizer import ChapterSummarizer
+from src.knowledge_builder import KnowledgeBuilder
 import json
 import gzip
 
@@ -35,7 +35,7 @@ def build_all():
     chunks_path = data_dir / "chunks.json"
     if not chunks_path.exists():
         print("\n📝 构建文本块索引...")
-        indexer = TextIndexer(chunk_size=800, overlap=100)
+        indexer = UnifiedIndexer(chunk_size=800, overlap=100)
         chunks = indexer.create_chunks(text)
         
         with open(chunks_path, 'w', encoding='utf-8') as f:
@@ -73,16 +73,22 @@ def build_all():
     else:
         print(f"\n📦 知识图谱已存在")
     
-    # 5. 构建章节摘要
+    # 5. 构建章节摘要和专家知识库
     summary_path = data_dir / "chapter_summaries.json"
-    if not summary_path.exists():
-        print("\n📚 构建章节摘要...")
-        summarizer = ChapterSummarizer()
-        chapters = summarizer.parse_chapters(text)
-        summaries = summarizer.generate_all_summaries()
-        summarizer.save(summaries, summary_path)
+    kb_path = data_dir / "knowledge_base.json"
+    
+    if not summary_path.exists() or not kb_path.exists():
+        print("\n📚 构建章节摘要和专家知识库...")
+        builder = KnowledgeBuilder()
+        chapters = builder.parse_chapters(text)
+        summaries = builder.generate_all_summaries()
+        builder.save_summaries(summary_path)
+        
+        # 构建专家知识库
+        builder.build_expert_knowledge()
+        builder.save_knowledge_base(kb_path)
     else:
-        print(f"\n📦 章节摘要已存在")
+        print(f"\n📦 章节摘要和知识库已存在")
     
     print("\n" + "="*60)
     print("✅ 所有索引构建完成！")

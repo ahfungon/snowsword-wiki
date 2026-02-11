@@ -10,7 +10,7 @@ from pathlib import Path
 # 添加 src 到路径
 sys.path.append(str(Path(__file__).parent))
 
-from src.indexer import TextIndexer
+from src.unified_indexer import UnifiedIndexer
 
 def main():
     # 检查文本文件是否存在
@@ -27,7 +27,7 @@ def main():
     print()
     
     # 创建索引器
-    indexer = TextIndexer(chunk_size=800, overlap=100)
+    indexer = UnifiedIndexer(chunk_size=800, overlap=100)
     
     # 构建索引
     try:
