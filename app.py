@@ -376,6 +376,41 @@ with st.sidebar:
         st.error("❌ DEEPSEEK_API_KEY 未配置")
     
     st.markdown("---")
+    
+    # 检查语义索引是否存在
+    zhipu_index_path = Path("data/zhipu_index")
+    has_semantic_index = (zhipu_index_path / "embeddings.npy").exists()
+    
+    st.subheader("语义索引")
+    if has_semantic_index:
+        st.success("✅ 语义索引已构建")
+    else:
+        st.warning("⚠️ 语义索引未构建")
+        
+        if st.button("🔨 构建语义索引", help="首次使用需要构建语义索引，约需5-10分钟"):
+            if not zhipu_key:
+                st.error("❌ 请先配置 ZHIPU_API_KEY")
+            else:
+                with st.spinner("🔄 正在构建语义索引，请耐心等待..."):
+                    try:
+                        # 添加 src 到路径
+                        sys.path.insert(0, str(Path(__file__).parent / "src"))
+                        from build_zhipu_index import build_semantic_index
+                        
+                        # 构建索引
+                        build_semantic_index(
+                            paragraphs_file=Path("data/processed_v2/paragraphs_v2.json"),
+                            output_dir=zhipu_index_path,
+                            zhipu_api_key=zhipu_key
+                        )
+                        st.success("✅ 语义索引构建完成！请刷新系统")
+                        st.balloons()
+                    except Exception as e:
+                        st.error(f"❌ 构建失败: {e}")
+                        import traceback
+                        st.error(traceback.format_exc())
+    
+    st.markdown("---")
     st.caption("点击 🔄 刷新系统 以应用新配置")
 
 # 初始化专家系统（通过 session_state 控制刷新）
