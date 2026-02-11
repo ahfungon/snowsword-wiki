@@ -1,5 +1,6 @@
+#!/usr/bin/env python3
 """
-雪中悍刀行 - 专家级智能百科 V2
+雪中悍刀行 - 专家级智能百科 V2 (支持智谱语义检索)
 整合语义检索、知识图谱、深度分析
 """
 
@@ -249,6 +250,15 @@ st.markdown("""
     }
     .stats-number { font-size: 24px; font-weight: bold; color: #ff4b4b; }
     .stats-label { font-size: 12px; color: #666; }
+    .retrieval-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: bold;
+    }
+    .retrieval-semantic { background: #4caf50; color: white; }
+    .retrieval-tfidf { background: #ff9800; color: white; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -257,22 +267,36 @@ st.markdown("""
 def get_expert_system():
     """初始化专家系统（只加载一次）"""
     try:
+        # 从环境变量或 secrets 读取 API Key
         api_key = os.getenv("DEEPSEEK_API_KEY")
-        if not api_key:
-            # 尝试从 secrets 读取
-            try:
+        zhipu_key = os.getenv("ZHIPU_API_KEY")
+        
+        # 尝试从 secrets 读取
+        try:
+            if not api_key:
                 api_key = st.secrets.get("DEEPSEEK_API_KEY")
-            except:
-                pass
+            if not zhipu_key:
+                zhipu_key = st.secrets.get("ZHIPU_API_KEY")
+        except:
+            pass
         
         if not api_key:
-            return None
+            return None, "missing_key"
         
         with st.spinner("📦 正在加载知识库..."):
-            return ExpertSystemV2(data_dir="data", api_key=api_key)
+            system = ExpertSystemV2(
+                data_dir="data", 
+                api_key=api_key,
+                zhipu_api_key=zhipu_key
+            )
+            
+            # 检查是否使用了语义检索
+            retrieval_mode = "semantic" if system.use_semantic else "tfidf"
+            
+            return system, retrieval_mode
     except Exception as e:
         st.error(f"❌ 加载失败: {e}")
-        return None
+        return None, str(e)
 
 # 标题
 st.markdown("<h1 class='header-text'>📚 雪中悍刀行 · 专家级百科</h1>", unsafe_allow_html=True)
@@ -324,18 +348,29 @@ with col4:
 st.markdown("---")
 
 # 初始化专家系统
-system = get_expert_system()
+system, status = get_expert_system()
 
 # API Key 检查
 if not system:
-    st.warning("⚠️ 请配置 DeepSeek API Key")
+    st.warning("⚠️ 请配置 API Keys")
     with st.expander("如何配置"):
         st.markdown("""
-        在 Streamlit Cloud 的 Advanced Settings 中添加：
-        - **Key**: `DEEPSEEK_API_KEY`
-        - **Value**: `sk-...`
+        在 Streamlit Cloud 的 Advanced Settings → Secrets 中添加：
+        ```toml
+        DEEPSEEK_API_KEY = "sk-..."
+        ZHIPU_API_KEY = "7bf1e26ae11344a09b9886056c12da01.5sNpyInlYXwp2ajB"
+        ```
+        
+        - **ZHIPU_API_KEY**: 用于语义检索（提升匹配质量）
+        - **DEEPSEEK_API_KEY**: 用于生成回答（必须）
         """)
     st.stop()
+
+# 显示检索模式
+if status == "semantic":
+    st.success("✅ 已启用智谱语义检索 - 匹配质量更高")
+else:
+    st.info("ℹ️ 使用 TF-IDF 检索 - 配置 ZHIPU_API_KEY 可启用语义检索")
 
 # 搜索框
 query = st.text_input(
@@ -379,6 +414,21 @@ if query:
                 result = system.answer(query)
                 
                 if result.get("success"):
+                    # 显示检索模式标签
+                    retrieval_mode = result.get('retrieval_mode', 'unknown')
+                    if retrieval_mode == 'semantic':
+                        st.markdown("""
+                        <div style="text-align: right; margin-bottom: 10px;">
+                            <span class="retrieval-badge retrieval-semantic">🔍 语义检索</span>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    else:
+                        st.markdown("""
+                        <div style="text-align: right; margin-bottom: 10px;">
+                            <span class="retrieval-badge retrieval-tfidf">🔍 TF-IDF检索</span>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    
                     # 显示回答
                     st.markdown("<div class='answer-box'>", unsafe_allow_html=True)
                     
@@ -437,4 +487,4 @@ if query:
 
 # 页脚
 st.markdown("---")
-st.caption("📌 基于《雪中悍刀行》全文构建 | 使用 DeepSeek AI 驱动 | 专家级文学分析")
+st.caption("📌 基于《雪中悍刀行》全文构建 | 语义检索 + DeepSeek AI 驱动 | 专家级文学分析")

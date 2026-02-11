@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-专家系统 V2 完整版 - 轻量方案
-整合：文本处理 + 轻量检索 + 专家AI
+专家系统 V2 完整版 - 支持智谱语义检索
+整合：文本处理 + 语义检索 + 专家AI
 """
 
 import json
+import os
 from pathlib import Path
 from typing import List, Dict
 import logging
@@ -22,24 +23,44 @@ logger = logging.getLogger(__name__)
 
 class ExpertSystemV2:
     """
-    专家系统 V2（轻量完整版）
+    专家系统 V2（支持智谱语义检索）
     """
     
-    def __init__(self, data_dir: str = "data", api_key: str = None):
+    def __init__(self, data_dir: str = "data", api_key: str = None, zhipu_api_key: str = None):
         self.data_dir = Path(data_dir)
+        self.zhipu_api_key = zhipu_api_key or os.getenv("ZHIPU_API_KEY")
         
         # 初始化组件
         self.retriever = None
         self.ai = None
+        self.use_semantic = False  # 是否使用语义检索
         
         # 加载
         self._init_retriever()
         self._init_ai(api_key)
     
     def _init_retriever(self):
-        """初始化检索器"""
+        """初始化检索器（优先使用智谱语义索引）"""
         logger.info("📂 初始化检索器...")
         
+        # 1. 优先尝试加载智谱语义索引
+        zhipu_index_dir = self.data_dir / "zhipu_index"
+        if zhipu_index_dir.exists() and (zhipu_index_dir / "embeddings.npy").exists():
+            if self.zhipu_api_key:
+                try:
+                    from zhipu_retriever import ZhipuEmbeddingRetriever
+                    self.retriever = ZhipuEmbeddingRetriever(api_key=self.zhipu_api_key)
+                    self.retriever.load_index(zhipu_index_dir)
+                    self.use_semantic = True
+                    logger.info("✅ 智谱语义检索器加载成功")
+                    return
+                except Exception as e:
+                    logger.warning(f"⚠️ 智谱语义索引加载失败: {e}")
+            else:
+                logger.info("ℹ️ 未配置 ZHIPU_API_KEY，跳过语义索引")
+        
+        # 2. 回退到 TF-IDF 索引
+        logger.info("📂 使用 TF-IDF 索引...")
         index_dir = self.data_dir / "semantic_index_light"
         
         # 检查索引是否存在
@@ -50,11 +71,12 @@ class ExpertSystemV2:
         # 加载索引
         self.retriever = LightweightRetriever()
         self.retriever.load_index(index_dir)
+        self.use_semantic = False
         
-        logger.info("✅ 检索器初始化完成")
+        logger.info("✅ TF-IDF 检索器初始化完成")
     
     def _build_index(self):
-        """构建索引"""
+        """构建 TF-IDF 索引（备用）"""
         from text_processor_v2 import TextProcessorV2
         
         # 检查处理后的数据是否存在
@@ -69,7 +91,7 @@ class ExpertSystemV2:
             )
         
         # 加载段落并构建索引
-        logger.info("🔨 构建语义索引...")
+        logger.info("🔨 构建 TF-IDF 索引...")
         with open(para_file, 'r', encoding='utf-8') as f:
             paragraphs = json.load(f)
         
@@ -84,6 +106,12 @@ class ExpertSystemV2:
             api_key=api_key,
             knowledge_base_path=self.data_dir
         )
+        
+        # 如果用了智谱检索器，也加载到 AI 中
+        if self.use_semantic and isinstance(self.retriever, ZhipuEmbeddingRetriever):
+            self.ai.retriever = self.retriever
+            self.ai.use_semantic = True
+            logger.info("✅ AI 已关联语义检索器")
         
         logger.info("✅ AI初始化完成")
     
@@ -100,9 +128,10 @@ class ExpertSystemV2:
         context_parts = []
         
         # 1. 相关原文段落
-        context_parts.append("【相关原文】")
+        index_type = "语义匹配" if self.use_semantic else "关键词匹配"
+        context_parts.append(f"【相关原文 ({index_type})】")
         for i, r in enumerate(results, 1):
-            context_parts.append(f"\n段落{i} [{r['chapter']}] (相关度: {r['similarity']:.3f}):")
+            context_parts.append(f"\n段落{i} [{r.get('chapter', '未知')}] (相关度: {r.get('similarity', 0):.3f}):")
             context_parts.append(r['content'][:400])
         
         # 2. 知识图谱信息（如果AI已加载）
@@ -169,7 +198,8 @@ class ExpertSystemV2:
                     "prompt_tokens": response.usage.prompt_tokens,
                     "completion_tokens": response.usage.completion_tokens,
                     "total_tokens": response.usage.total_tokens
-                }
+                },
+                "retrieval_mode": "semantic" if self.use_semantic else "tfidf"
             }
         except Exception as e:
             logger.error(f"❌ API 错误: {e}")
@@ -207,5 +237,6 @@ if __name__ == "__main__":
             print(f"\n💬 回答:")
             print(result['answer'])
             print(f"\n💰 Token: {result['usage']['total_tokens']}")
+            print(f"🔍 检索模式: {result.get('retrieval_mode', 'unknown')}")
         else:
             print(f"❌ 错误: {result['error']}")
