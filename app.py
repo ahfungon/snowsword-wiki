@@ -264,8 +264,11 @@ st.markdown("""
 
 # 初始化专家系统（缓存）
 @st.cache_resource
-def get_expert_system():
-    """初始化专家系统（只加载一次）"""
+def get_expert_system(_refresh: int = 0):
+    """
+    初始化专家系统（只加载一次）
+    _refresh: 刷新标记，改变值会强制重新加载
+    """
     try:
         # 从环境变量或 secrets 读取 API Key
         api_key = os.getenv("DEEPSEEK_API_KEY")
@@ -347,8 +350,37 @@ with col4:
 
 st.markdown("---")
 
-# 初始化专家系统
-system, status = get_expert_system()
+# 侧边栏：系统设置
+with st.sidebar:
+    st.header("⚙️ 系统设置")
+    
+    # 刷新按钮
+    if st.button("🔄 刷新系统", help="清除缓存并重新加载系统配置"):
+        # 强制重新加载
+        st.cache_resource.clear()
+        st.rerun()
+    
+    # 显示当前配置
+    st.subheader("当前配置")
+    zhipu_key = os.getenv("ZHIPU_API_KEY") or st.secrets.get("ZHIPU_API_KEY", "")
+    deepseek_key = os.getenv("DEEPSEEK_API_KEY") or st.secrets.get("DEEPSEEK_API_KEY", "")
+    
+    if zhipu_key:
+        st.success("✅ ZHIPU_API_KEY 已配置")
+    else:
+        st.error("❌ ZHIPU_API_KEY 未配置")
+    
+    if deepseek_key:
+        st.success("✅ DEEPSEEK_API_KEY 已配置")
+    else:
+        st.error("❌ DEEPSEEK_API_KEY 未配置")
+    
+    st.markdown("---")
+    st.caption("点击 🔄 刷新系统 以应用新配置")
+
+# 初始化专家系统（通过 session_state 控制刷新）
+refresh_count = st.session_state.get('refresh_count', 0)
+system, status = get_expert_system(_refresh=refresh_count)
 
 # API Key 检查
 if not system:
