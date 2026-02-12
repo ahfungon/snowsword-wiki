@@ -68,6 +68,25 @@ class ExpertSystemV2:
         """初始化检索器（优先使用智谱语义索引）"""
         logger.info("📂 初始化检索器...")
         
+        # 0. 尝试加载压缩索引（自动解压）
+        try:
+            from compressed_index_loader import load_compressed_index
+            result = load_compressed_index(self.data_dir)
+            if result:
+                embeddings, paragraphs, metadata = result
+                if self.zhipu_api_key:
+                    from zhipu_retriever import ZhipuEmbeddingRetriever
+                    self.retriever = ZhipuEmbeddingRetriever(api_key=self.zhipu_api_key)
+                    self.retriever.embeddings = embeddings
+                    self.retriever.paragraphs = paragraphs
+                    self.retriever.metadata = metadata
+                    self.retriever.dimension = embeddings.shape[1]
+                    self.use_semantic = True
+                    logger.info("✅ 从压缩文件加载智谱语义检索器成功")
+                    return
+        except Exception as e:
+            logger.warning(f"⚠️ 加载压缩索引失败: {e}")
+        
         # 1. 优先尝试加载智谱语义索引
         zhipu_index_dir = self.data_dir / "zhipu_index"
         if zhipu_index_dir.exists() and (zhipu_index_dir / "embeddings.npy").exists():
