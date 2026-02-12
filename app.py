@@ -381,22 +381,90 @@ with st.sidebar:
     # 检查语义索引是否存在
     zhipu_index_path = Path("data/zhipu_index")
     
-    # 调试信息
-    st.subheader("调试信息")
-    st.text(f"当前工作目录: {os.getcwd()}")
-    st.text(f"data目录存在: {Path('data').exists()}")
-    st.text(f"zhipu_index目录存在: {zhipu_index_path.exists()}")
-    if zhipu_index_path.exists():
-        files = list(zhipu_index_path.glob("*"))
-        st.text(f"zhipu_index内文件: {[f.name for f in files]}")
+    # 数据状态显示
+    st.subheader("📊 数据状态")
     
-    has_semantic_index = (zhipu_index_path / "embeddings.npy").exists()
+    # 检查各种索引文件
+    data_dir = Path("data")
     
-    st.subheader("语义索引")
-    if has_semantic_index:
-        st.success("✅ 语义索引已构建")
+    # 1. 原始索引文件
+    original_emb = zhipu_index_path / "embeddings.npy"
+    original_meta = zhipu_index_path / "metadata.json"
+    
+    # 2. 压缩索引文件
+    compressed_emb = data_dir / "zhipu_index_embeddings.npz"
+    compressed_texts = data_dir / "zhipu_index_texts.json.gz"
+    compressed_meta = data_dir / "zhipu_index_meta.json.gz"
+    
+    # 3. 原始文本文件
+    novel_file = data_dir / "雪中悍刀行.txt"
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("**原始索引文件**")
+        if original_emb.exists():
+            size_mb = original_emb.stat().st_size / (1024 * 1024)
+            st.success(f"✅ embeddings.npy: {size_mb:.1f} MB")
+        else:
+            st.error("❌ embeddings.npy: 不存在")
+            
+        if original_meta.exists():
+            size_mb = original_meta.stat().st_size / (1024 * 1024)
+            st.success(f"✅ metadata.json: {size_mb:.1f} MB")
+        else:
+            st.error("❌ metadata.json: 不存在")
+    
+    with col2:
+        st.markdown("**压缩索引文件**")
+        if compressed_emb.exists():
+            size_mb = compressed_emb.stat().st_size / (1024 * 1024)
+            st.success(f"✅ embeddings.npz: {size_mb:.1f} MB")
+        else:
+            st.error("❌ embeddings.npz: 不存在")
+            
+        if compressed_texts.exists():
+            size_mb = compressed_texts.stat().st_size / (1024 * 1024)
+            st.success(f"✅ texts.json.gz: {size_mb:.1f} MB")
+        else:
+            st.error("❌ texts.json.gz: 不存在")
+            
+        if compressed_meta.exists():
+            size_kb = compressed_meta.stat().st_size / 1024
+            st.success(f"✅ meta.json.gz: {size_kb:.1f} KB")
+        else:
+            st.error("❌ meta.json.gz: 不存在")
+    
+    # 检查小说原文
+    st.markdown("**原始数据文件**")
+    if novel_file.exists():
+        size_mb = novel_file.stat().st_size / (1024 * 1024)
+        st.success(f"✅ 雪中悍刀行.txt: {size_mb:.1f} MB")
     else:
-        st.warning("⚠️ 语义索引未构建")
+        st.error("❌ 雪中悍刀行.txt: 不存在")
+    
+    # 判断索引状态
+    has_original_index = original_emb.exists() and original_meta.exists()
+    has_compressed_index = compressed_emb.exists() and compressed_texts.exists()
+    
+    st.markdown("---")
+    st.subheader("🧠 语义索引状态")
+    
+    if has_original_index:
+        st.success("✅ 语义索引已加载（原始文件）")
+        # 尝试读取段落数量
+        try:
+            import json
+            with open(original_meta, 'r', encoding='utf-8') as f:
+                meta = json.load(f)
+                st.info(f"📖 索引段落数: {len(meta.get('paragraphs', []))}")
+        except:
+            pass
+    elif has_compressed_index:
+        st.success("✅ 语义索引已加载（压缩文件，首次会自动解压）")
+        st.info("💡 下次加载会使用已解压的缓存文件")
+    else:
+        st.warning("⚠️ 语义索引未加载")
         
         if st.button("🔨 构建语义索引", help="首次使用需要构建语义索引，约需5-10分钟"):
             if not zhipu_key:
@@ -454,6 +522,27 @@ if not system:
 # 显示检索模式
 if status == "semantic":
     st.success("✅ 已启用智谱语义检索 - 匹配质量更高")
+    
+    # 显示已加载的索引详情
+    with st.expander("📊 查看已加载索引详情"):
+        if system and system.retriever:
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("段落数量", len(system.retriever.paragraphs))
+            with col2:
+                st.metric("向量维度", system.retriever.dimension)
+            with col3:
+                emb_size_mb = system.retriever.embeddings.nbytes / (1024 * 1024) if hasattr(system.retriever, 'embeddings') else 0
+                st.metric("内存占用", f"{emb_size_mb:.1f} MB")
+            
+            st.info(f"🔍 检索模式: {'智谱语义检索' if system.use_semantic else 'TF-IDF'}")
+            
+            # 显示前3个段落示例
+            st.markdown("**前3个段落示例：**")
+            for i, para in enumerate(system.retriever.paragraphs[:3]):
+                st.text(f"[{i}] {para[:80]}...")
+        else:
+            st.warning("检索器未正确加载")
 else:
     st.info("ℹ️ 使用 TF-IDF 检索 - 配置 ZHIPU_API_KEY 可启用语义检索")
 
