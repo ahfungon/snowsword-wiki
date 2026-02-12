@@ -17,6 +17,20 @@ sys.path.append(str(Path(__file__).parent))
 from lightweight_retriever import LightweightRetriever
 from expert_ai_v2 import ExpertAIV2
 
+# 延迟导入，避免循环依赖
+def get_zhipu_retriever_class():
+    """延迟导入 ZhipuEmbeddingRetriever"""
+    try:
+        from zhipu_retriever import ZhipuEmbeddingRetriever
+        return ZhipuEmbeddingRetriever
+    except ImportError:
+        # 尝试相对导入
+        try:
+            from .zhipu_retriever import ZhipuEmbeddingRetriever
+            return ZhipuEmbeddingRetriever
+        except ImportError:
+            return None
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -48,7 +62,9 @@ class ExpertSystemV2:
         if zhipu_index_dir.exists() and (zhipu_index_dir / "embeddings.npy").exists():
             if self.zhipu_api_key:
                 try:
-                    from zhipu_retriever import ZhipuEmbeddingRetriever
+                    ZhipuEmbeddingRetriever = get_zhipu_retriever_class()
+                    if ZhipuEmbeddingRetriever is None:
+                        raise ImportError("无法导入 ZhipuEmbeddingRetriever")
                     self.retriever = ZhipuEmbeddingRetriever(api_key=self.zhipu_api_key)
                     self.retriever.load_index(zhipu_index_dir)
                     self.use_semantic = True
