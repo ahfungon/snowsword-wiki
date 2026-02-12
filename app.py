@@ -635,4 +635,4 @@ with st.expander("🧪 检索效果对比测试"):
 
 # 页脚
 st.markdown("---")
-st.caption("📌 基于《雪中悍刀行》全文构建 | 语义检索 + DeepSeek AI 驱动 | 专家级文学分析")
+st.caption("📌 基于《雪中悍刀行》全文构建 | 智谱 语义检索 + DeepSeek AI 驱动 | 专家级文学分析")
