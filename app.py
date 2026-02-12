@@ -379,6 +379,16 @@ with st.sidebar:
     
     # 检查语义索引是否存在
     zhipu_index_path = Path("data/zhipu_index")
+    
+    # 调试信息
+    st.subheader("调试信息")
+    st.text(f"当前工作目录: {os.getcwd()}")
+    st.text(f"data目录存在: {Path('data').exists()}")
+    st.text(f"zhipu_index目录存在: {zhipu_index_path.exists()}")
+    if zhipu_index_path.exists():
+        files = list(zhipu_index_path.glob("*"))
+        st.text(f"zhipu_index内文件: {[f.name for f in files]}")
+    
     has_semantic_index = (zhipu_index_path / "embeddings.npy").exists()
     
     st.subheader("语义索引")

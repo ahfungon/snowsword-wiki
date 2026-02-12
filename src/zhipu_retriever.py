@@ -15,13 +15,20 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def get_zhipu_embedding(texts: List[str], api_key: str, model: str = "embedding-2") -> List[List[float]]:
+def get_zhipu_embedding(texts: List[str], api_key: str, model: str = "embedding-2", max_retries: int = 3, verify_ssl: bool = True) -> List[List[float]]:
     """
     调用智谱 AI Embedding API
     文档: https://open.bigmodel.cn/dev/api#vector
+    
+    Args:
+        verify_ssl: 是否验证 SSL 证书（本地测试遇到 SSL 问题时可设为 False）
     """
     import requests
     import time
+    import ssl
+    import urllib3
+    from requests.adapters import HTTPAdapter
+    from urllib3.util.retry import Retry
     
     url = "https://open.bigmodel.cn/api/paas/v4/embeddings"
     
@@ -29,6 +36,21 @@ def get_zhipu_embedding(texts: List[str], api_key: str, model: str = "embedding-
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json"
     }
+    
+    # 如果不验证 SSL，禁用警告
+    if not verify_ssl:
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+    
+    # 创建带重试的 session
+    session = requests.Session()
+    retry_strategy = Retry(
+        total=max_retries,
+        backoff_factor=1,
+        status_forcelist=[429, 500, 502, 503, 504],
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session.mount("http://", adapter)
+    session.mount("https://", adapter)
     
     # 智谱一次最多 8 条
     batch_size = 8
@@ -42,28 +64,37 @@ def get_zhipu_embedding(texts: List[str], api_key: str, model: str = "embedding-
             "input": batch
         }
         
-        try:
-            response = requests.post(url, headers=headers, json=payload, timeout=30)
-            response.raise_for_status()
-            
-            data = response.json()
-            
-            if "data" in data:
-                # 按 index 排序
-                embeddings = sorted(data["data"], key=lambda x: x["index"])
-                all_embeddings.extend([item["embedding"] for item in embeddings])
-                logger.info(f"✅ 批次 {i//batch_size + 1} 成功，{len(batch)} 条")
-            else:
-                logger.error(f"❌ API 返回异常: {data}")
-                raise ValueError(f"API 返回异常: {data}")
-            
-            # 简单限速
-            if i + batch_size < len(texts):
-                time.sleep(0.5)
+        # 带重试的请求
+        for attempt in range(max_retries):
+            try:
+                response = session.post(url, headers=headers, json=payload, timeout=30, verify=verify_ssl)
+                response.raise_for_status()
                 
-        except requests.exceptions.RequestException as e:
-            logger.error(f"❌ 请求失败: {e}")
-            raise
+                data = response.json()
+                
+                if "data" in data:
+                    # 按 index 排序
+                    embeddings = sorted(data["data"], key=lambda x: x["index"])
+                    all_embeddings.extend([item["embedding"] for item in embeddings])
+                    logger.info(f"✅ 批次 {i//batch_size + 1} 成功，{len(batch)} 条")
+                    break
+                else:
+                    logger.error(f"❌ API 返回异常: {data}")
+                    raise ValueError(f"API 返回异常: {data}")
+            
+            except requests.exceptions.SSLError as e:
+                logger.warning(f"⚠️ SSL 错误 (尝试 {attempt+1}/{max_retries}): {e}")
+                if attempt < max_retries - 1:
+                    time.sleep(2 ** attempt)  # 指数退避
+                else:
+                    raise
+            except Exception as e:
+                logger.error(f"❌ 请求失败: {e}")
+                raise
+        
+        # 简单限速
+        if i + batch_size < len(texts):
+            time.sleep(0.5)
     
     return all_embeddings
 
