@@ -14,13 +14,50 @@ import sys
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# 添加 src 到路径
-sys.path.append(str(Path(__file__).parent))
+# 添加 src 到路径（兼容本地和云端）
+_current_dir = Path(__file__).parent
+if str(_current_dir) not in sys.path:
+    sys.path.insert(0, str(_current_dir))
+if str(_current_dir.parent) not in sys.path:
+    sys.path.insert(0, str(_current_dir.parent))
 
-from lightweight_retriever import LightweightRetriever
-from expert_ai_v2 import ExpertAIV2
+# 尝试多种导入方式
+try:
+    from lightweight_retriever import LightweightRetriever
+    from expert_ai_v2 import ExpertAIV2
+except ImportError:
+    # 尝试相对导入
+    try:
+        from .lightweight_retriever import LightweightRetriever
+        from .expert_ai_v2 import ExpertAIV2
+    except ImportError:
+        # 尝试绝对路径导入
+        import importlib.util
+        lightweight_path = _current_dir / "lightweight_retriever.py"
+        expert_ai_path = _current_dir / "expert_ai_v2.py"
+        
+        if lightweight_path.exists():
+            spec = importlib.util.spec_from_file_location("lightweight_retriever", lightweight_path)
+            lightweight_module = importlib.util.module_from_spec(spec)
+            sys.modules["lightweight_retriever"] = lightweight_module
+            spec.loader.exec_module(lightweight_module)
+            LightweightRetriever = lightweight_module.LightweightRetriever
+        else:
+            raise ImportError(f"找不到 lightweight_retriever: {lightweight_path}")
+        
+        if expert_ai_path.exists():
+            spec = importlib.util.spec_from_file_location("expert_ai_v2", expert_ai_path)
+            expert_ai_module = importlib.util.module_from_spec(spec)
+            sys.modules["expert_ai_v2"] = expert_ai_module
+            spec.loader.exec_module(expert_ai_module)
+            ExpertAIV2 = expert_ai_module.ExpertAIV2
+        else:
+            raise ImportError(f"找不到 expert_ai_v2: {expert_ai_path}")
 
 # 尝试导入智谱检索器
+ZHIPU_RETRIEVER_AVAILABLE = False
+ZhipuEmbeddingRetriever = None
+
 try:
     from zhipu_retriever import ZhipuEmbeddingRetriever
     ZHIPU_RETRIEVER_AVAILABLE = True
@@ -29,20 +66,19 @@ except ImportError as e:
     logger.warning(f"⚠️ 无法导入 ZhipuEmbeddingRetriever: {e}")
     # 尝试绝对路径导入
     try:
-        import importlib.util
-        zhipu_path = Path(__file__).parent / "zhipu_retriever.py"
+        zhipu_path = _current_dir / "zhipu_retriever.py"
         if zhipu_path.exists():
             spec = importlib.util.spec_from_file_location("zhipu_retriever", zhipu_path)
             zhipu_module = importlib.util.module_from_spec(spec)
+            sys.modules["zhipu_retriever"] = zhipu_module
             spec.loader.exec_module(zhipu_module)
             ZhipuEmbeddingRetriever = zhipu_module.ZhipuEmbeddingRetriever
             ZHIPU_RETRIEVER_AVAILABLE = True
             logger.info("✅ ZhipuEmbeddingRetriever 通过绝对路径导入成功")
         else:
-            raise FileNotFoundError(f"找不到文件: {zhipu_path}")
+            logger.warning(f"⚠️ 找不到 zhipu_retriever 文件: {zhipu_path}")
     except Exception as e2:
         logger.error(f"❌ 绝对路径导入也失败: {e2}")
-        ZhipuEmbeddingRetriever = None
         ZHIPU_RETRIEVER_AVAILABLE = False
 
 
