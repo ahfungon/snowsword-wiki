@@ -535,15 +535,29 @@ if query:
                     
                     st.markdown("</div>", unsafe_allow_html=True)
                     
-                    # 显示参考来源
-                    with st.expander("📚 参考来源"):
+                    # 显示检索详情
+                    with st.expander("📚 参考来源 & 检索详情"):
+                        # 显示检索模式
+                        retrieval_mode = result.get('retrieval_mode', 'unknown')
+                        if retrieval_mode == 'semantic':
+                            st.success("🔍 检索模式: 智谱语义检索 (Embedding 向量匹配)")
+                        else:
+                            st.warning("🔍 检索模式: TF-IDF 关键词匹配")
+                        
+                        st.markdown("---")
+                        
                         # 获取检索到的段落
                         context = system.get_context(query, top_k=3)
                         st.markdown("**检索到的相关原文：**")
-                        st.markdown(context[:1000] + "...")
+                        st.markdown(context[:1500] + "...")
                     
-                    # Token 使用
-                    st.caption(f"💰 Token 使用: {result['usage']['total_tokens']} | 模型: DeepSeek-V3")
+                    # Token 使用和检索模式
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        st.caption(f"💰 Token: {result['usage']['total_tokens']}")
+                    with col2:
+                        mode_text = "语义检索" if result.get('retrieval_mode') == 'semantic' else "TF-IDF检索"
+                        st.caption(f"🔍 {mode_text}")
                 else:
                     st.error(f"生成回答失败: {result.get('error', '未知错误')}")
             
@@ -551,6 +565,55 @@ if query:
                 st.error(f"处理失败: {e}")
                 import traceback
                 st.error(traceback.format_exc())
+
+# 对比测试区域（展开查看）
+with st.expander("🧪 检索效果对比测试"):
+    st.markdown("""
+    **测试语义检索 vs TF-IDF 的差异**
+    
+    试试这些问题，看语义检索是否能匹配到更相关的原文：
+    """
+    )
+    
+    test_query = st.text_input(
+        "输入测试问题",
+        placeholder="例如：世子为什么杀人？（试试用'世子'代替'徐凤年'）",
+        key="test_query"
+    )
+    
+    if test_query and st.button("🔍 对比检索结果", key="compare_btn"):
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("#### 🔍 TF-IDF 检索结果")
+            try:
+                # 临时切换到 TF-IDF 模式查看
+                from src.lightweight_retriever import LightweightRetriever
+                tfidf_retriever = LightweightRetriever()
+                tfidf_index = Path("data/semantic_index_light")
+                if tfidf_index.exists():
+                    tfidf_retriever.load_index(tfidf_index)
+                    tfidf_results = tfidf_retriever.search(test_query, top_k=3)
+                    for i, r in enumerate(tfidf_results, 1):
+                        st.markdown(f"**{i}.** [{r.get('chapter', '未知')}] 相似度: {r.get('similarity', 0):.3f}")
+                        st.markdown(f"> {r['content'][:100]}...")
+                        st.markdown("---")
+            except Exception as e:
+                st.error(f"TF-IDF 检索失败: {e}")
+        
+        with col2:
+            st.markdown("#### 🧠 语义检索结果")
+            try:
+                if system.use_semantic:
+                    semantic_results = system.retriever.search(test_query, top_k=3)
+                    for i, r in enumerate(semantic_results, 1):
+                        st.markdown(f"**{i}.** [{r.get('chapter', '未知')}] 相似度: {r.get('similarity', 0):.3f}")
+                        st.markdown(f"> {r['content'][:100]}...")
+                        st.markdown("---")
+                else:
+                    st.warning("语义检索未启用")
+            except Exception as e:
+                st.error(f"语义检索失败: {e}")
 
 # 页脚
 st.markdown("---")
