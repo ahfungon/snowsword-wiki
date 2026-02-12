@@ -11,28 +11,24 @@ from typing import List, Dict
 import logging
 import sys
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 # 添加 src 到路径
 sys.path.append(str(Path(__file__).parent))
 
 from lightweight_retriever import LightweightRetriever
 from expert_ai_v2 import ExpertAIV2
 
-# 延迟导入，避免循环依赖
-def get_zhipu_retriever_class():
-    """延迟导入 ZhipuEmbeddingRetriever"""
-    try:
-        from zhipu_retriever import ZhipuEmbeddingRetriever
-        return ZhipuEmbeddingRetriever
-    except ImportError:
-        # 尝试相对导入
-        try:
-            from .zhipu_retriever import ZhipuEmbeddingRetriever
-            return ZhipuEmbeddingRetriever
-        except ImportError:
-            return None
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# 尝试导入智谱检索器
+try:
+    from zhipu_retriever import ZhipuEmbeddingRetriever
+    ZHIPU_RETRIEVER_AVAILABLE = True
+    logger.info("✅ ZhipuEmbeddingRetriever 导入成功")
+except ImportError as e:
+    logger.warning(f"⚠️ 无法导入 ZhipuEmbeddingRetriever: {e}")
+    ZhipuEmbeddingRetriever = None
+    ZHIPU_RETRIEVER_AVAILABLE = False
 
 
 class ExpertSystemV2:
@@ -62,9 +58,8 @@ class ExpertSystemV2:
         if zhipu_index_dir.exists() and (zhipu_index_dir / "embeddings.npy").exists():
             if self.zhipu_api_key:
                 try:
-                    ZhipuEmbeddingRetriever = get_zhipu_retriever_class()
-                    if ZhipuEmbeddingRetriever is None:
-                        raise ImportError("无法导入 ZhipuEmbeddingRetriever")
+                    if not ZHIPU_RETRIEVER_AVAILABLE or ZhipuEmbeddingRetriever is None:
+                        raise ImportError("ZhipuEmbeddingRetriever 模块不可用")
                     self.retriever = ZhipuEmbeddingRetriever(api_key=self.zhipu_api_key)
                     self.retriever.load_index(zhipu_index_dir)
                     self.use_semantic = True
