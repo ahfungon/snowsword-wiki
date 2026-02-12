@@ -358,6 +358,7 @@ with st.sidebar:
     if st.button("🔄 刷新系统", help="清除缓存并重新加载系统配置"):
         # 强制重新加载
         st.cache_resource.clear()
+        st.session_state['force_refresh'] = True
         st.rerun()
     
     # 显示当前配置
@@ -423,9 +424,16 @@ with st.sidebar:
     st.markdown("---")
     st.caption("点击 🔄 刷新系统 以应用新配置")
 
-# 初始化专家系统（通过 session_state 控制刷新）
-refresh_count = st.session_state.get('refresh_count', 0)
-system, status = get_expert_system(_refresh=refresh_count)
+# 初始化专家系统
+# 检查是否需要强制刷新（点击刷新按钮后）
+if st.session_state.get('force_refresh', False):
+    st.cache_resource.clear()
+    st.session_state['force_refresh'] = False
+    refresh_val = 1  # 强制刷新
+else:
+    refresh_val = 0
+
+system, status = get_expert_system(_refresh=refresh_val)
 
 # API Key 检查
 if not system:

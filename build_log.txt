@@ -1448,3 +1448,1663 @@ INFO:zhipu_retriever:✅ 批次 1 成功，8 条
 INFO:zhipu_retriever:✅ 批次 1 成功，8 条
 INFO:zhipu_retriever:✅ 批次 1 成功，8 条
 INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+✅
+   批次 480/1548 (8 条)... ✅
+   批次 481/1548 (8 条)... ✅
+   批次 482/1548 (8 条)... ✅
+   批次 483/1548 (8 条)... ✅
+   批次 484/1548 (8 条)... ✅
+   批次 485/1548 (8 条)... ✅
+   批次 486/1548 (8 条)... ✅
+   批次 487/1548 (8 条)... ✅
+   批次 488/1548 (8 条)... ✅
+   批次 489/1548 (8 条)... ✅
+   批次 490/1548 (8 条)... ✅
+   批次 491/1548 (8 条)... ✅
+   批次 492/1548 (8 条)... ✅
+   批次 493/1548 (8 条)... ✅
+   批次 494/1548 (8 条)... ✅
+   批次 495/1548 (8 条)... ✅
+   批次 496/1548 (8 条)... ✅
+   批次 497/1548 (8 条)... ✅
+   批次 498/1548 (8 条)... ✅
+   批次 499/1548 (8 条)... ✅
+   批次 500/1548 (8 条)... ✅
+   批次 501/1548 (8 条)... ✅
+   批次 502/1548 (8 条)... ✅
+   批次 503/1548 (8 条)... ✅
+   批次 504/1548 (8 条)... ✅
+   批次 505/1548 (8 条)... ✅
+   批次 506/1548 (8 条)... ✅
+   批次 507/1548 (8 条)... ✅
+   批次 508/1548 (8 条)... ✅
+   批次 509/1548 (8 条)... ✅
+   批次 510/1548 (8 条)... ✅
+   批次 511/1548 (8 条)... ✅
+   批次 512/1548 (8 条)... ✅
+   批次 513/1548 (8 条)... ✅
+   批次 514/1548 (8 条)... ✅
+   批次 515/1548 (8 条)... ✅
+   批次 516/1548 (8 条)... ✅
+   批次 517/1548 (8 条)... ✅
+   批次 518/1548 (8 条)... ✅
+   批次 519/1548 (8 条)... ✅
+   批次 520/1548 (8 条)... ✅
+   批次 521/1548 (8 条)... ✅
+   批次 522/1548 (8 条)... ✅
+   批次 523/1548 (8 条)... ✅
+   批次 524/1548 (8 条)... ✅
+   批次 525/1548 (8 条)... ✅
+   批次 526/1548 (8 条)... ✅
+   批次 527/1548 (8 条)... ✅
+   批次 528/1548 (8 条)... ✅
+   批次 529/1548 (8 条)... ✅
+   批次 530/1548 (8 条)... ✅
+   批次 531/1548 (8 条)... ✅
+   批次 532/1548 (8 条)... ✅
+   批次 533/1548 (8 条)... ✅
+   批次 534/1548 (8 条)... ✅
+   批次 535/1548 (8 条)... ✅
+   批次 536/1548 (8 条)... ✅
+   批次 537/1548 (8 条)... ✅
+   批次 538/1548 (8 条)... ✅
+   批次 539/1548 (8 条)... ✅
+   批次 540/1548 (8 条)... ✅
+   批次 541/1548 (8 条)... ✅
+   批次 542/1548 (8 条)... ✅
+   批次 543/1548 (8 条)... ✅
+   批次 544/1548 (8 条)... ✅
+   批次 545/1548 (8 条)... ✅
+   批次 546/1548 (8 条)... ✅
+   批次 547/1548 (8 条)... ✅
+   批次 548/1548 (8 条)... ✅
+   批次 549/1548 (8 条)... ✅
+   批次 550/1548 (8 条)... ✅
+   批次 551/1548 (8 条)... ✅
+   批次 552/1548 (8 条)... ✅
+   批次 553/1548 (8 条)... ✅
+   批次 554/1548 (8 条)... ✅
+   批次 555/1548 (8 条)... ✅
+   批次 556/1548 (8 条)... ✅
+   批次 557/1548 (8 条)... ✅
+   批次 558/1548 (8 条)... ✅
+   批次 559/1548 (8 条)... ✅
+   批次 560/1548 (8 条)... ✅
+   批次 561/1548 (8 条)... ✅
+   批次 562/1548 (8 条)... ✅
+   批次 563/1548 (8 条)... ✅
+   批次 564/1548 (8 条)... ✅
+   批次 565/1548 (8 条)... ✅
+   批次 566/1548 (8 条)... ✅
+   批次 567/1548 (8 条)... ✅
+   批次 568/1548 (8 条)... ✅
+   批次 569/1548 (8 条)... ✅
+   批次 570/1548 (8 条)... ✅
+   批次 571/1548 (8 条)... ✅
+   批次 572/1548 (8 条)... ✅
+   批次 573/1548 (8 条)... ✅
+   批次 574/1548 (8 条)... ✅
+   批次 575/1548 (8 条)... ✅
+   批次 576/1548 (8 条)... ✅
+   批次 577/1548 (8 条)... ✅
+   批次 578/1548 (8 条)... ✅
+   批次 579/1548 (8 条)... ✅
+   批次 580/1548 (8 条)... ✅
+   批次 581/1548 (8 条)... ✅
+   批次 582/1548 (8 条)... ✅
+   批次 583/1548 (8 条)... ✅
+   批次 584/1548 (8 条)... ✅
+   批次 585/1548 (8 条)... ✅
+   批次 586/1548 (8 条)... ✅
+   批次 587/1548 (8 条)... ✅
+   批次 588/1548 (8 条)... ✅
+   批次 589/1548 (8 条)... ✅
+   批次 590/1548 (8 条)... ✅
+   批次 591/1548 (8 条)... ✅
+   批次 592/1548 (8 条)... ✅
+   批次 593/1548 (8 条)... ✅
+   批次 594/1548 (8 条)... ✅
+   批次 595/1548 (8 条)... ✅
+   批次 596/1548 (8 条)... ✅
+   批次 597/1548 (8 条)... ✅
+   批次 598/1548 (8 条)... ✅
+   批次 599/1548 (8 条)... ✅
+   批次 600/1548 (8 条)... ✅
+   批次 601/1548 (8 条)... ✅
+   批次 602/1548 (8 条)... ✅
+   批次 603/1548 (8 条)... ✅
+   批次 604/1548 (8 条)... ✅
+   批次 605/1548 (8 条)... ✅
+   批次 606/1548 (8 条)... ✅
+   批次 607/1548 (8 条)... ✅
+   批次 608/1548 (8 条)... ✅
+   批次 609/1548 (8 条)... ✅
+   批次 610/1548 (8 条)... ✅
+   批次 611/1548 (8 条)... ✅
+   批次 612/1548 (8 条)... ✅
+   批次 613/1548 (8 条)... ✅
+   批次 614/1548 (8 条)... ✅
+   批次 615/1548 (8 条)... ✅
+   批次 616/1548 (8 条)... ✅
+   批次 617/1548 (8 条)... ✅
+   批次 618/1548 (8 条)... ✅
+   批次 619/1548 (8 条)... ✅
+   批次 620/1548 (8 条)... ✅
+   批次 621/1548 (8 条)... ✅
+   批次 622/1548 (8 条)... ✅
+   批次 623/1548 (8 条)... ✅
+   批次 624/1548 (8 条)... ✅
+   批次 625/1548 (8 条)... ✅
+   批次 626/1548 (8 条)... ✅
+   批次 627/1548 (8 条)... ✅
+   批次 628/1548 (8 条)... ✅
+   批次 629/1548 (8 条)... ✅
+   批次 630/1548 (8 条)... ✅
+   批次 631/1548 (8 条)... ✅
+   批次 632/1548 (8 条)... ✅
+   批次 633/1548 (8 条)... ✅
+   批次 634/1548 (8 条)... ✅
+   批次 635/1548 (8 条)... ✅
+   批次 636/1548 (8 条)... ✅
+   批次 637/1548 (8 条)... ✅
+   批次 638/1548 (8 条)... ✅
+   批次 639/1548 (8 条)... ✅
+   批次 640/1548 (8 条)... ✅
+   批次 641/1548 (8 条)... ✅
+   批次 642/1548 (8 条)... ✅
+   批次 643/1548 (8 条)... ✅
+   批次 644/1548 (8 条)... ✅
+   批次 645/1548 (8 条)... ✅
+   批次 646/1548 (8 条)... ✅
+   批次 647/1548 (8 条)... ✅
+   批次 648/1548 (8 条)... ✅
+   批次 649/1548 (8 条)... ✅
+   批次 650/1548 (8 条)... ✅
+   批次 651/1548 (8 条)... ✅
+   批次 652/1548 (8 条)... ✅
+   批次 653/1548 (8 条)... ✅
+   批次 654/1548 (8 条)... ✅
+   批次 655/1548 (8 条)... ✅
+   批次 656/1548 (8 条)... ✅
+   批次 657/1548 (8 条)... ✅
+   批次 658/1548 (8 条)... ✅
+   批次 659/1548 (8 条)... ✅
+   批次 660/1548 (8 条)... ✅
+   批次 661/1548 (8 条)... ✅
+   批次 662/1548 (8 条)... ✅
+   批次 663/1548 (8 条)... ✅
+   批次 664/1548 (8 条)... ✅
+   批次 665/1548 (8 条)... ✅
+   批次 666/1548 (8 条)... ✅
+   批次 667/1548 (8 条)... ✅
+   批次 668/1548 (8 条)... ✅
+   批次 669/1548 (8 条)... ✅
+   批次 670/1548 (8 条)... ✅
+   批次 671/1548 (8 条)... ✅
+   批次 672/1548 (8 条)... ✅
+   批次 673/1548 (8 条)... ✅
+   批次 674/1548 (8 条)... ✅
+   批次 675/1548 (8 条)... ✅
+   批次 676/1548 (8 条)... ✅
+   批次 677/1548 (8 条)... ✅
+   批次 678/1548 (8 条)... ✅
+   批次 679/1548 (8 条)... ✅
+   批次 680/1548 (8 条)... ✅
+   批次 681/1548 (8 条)... ✅
+   批次 682/1548 (8 条)... ✅
+   批次 683/1548 (8 条)... ✅
+   批次 684/1548 (8 条)... ✅
+   批次 685/1548 (8 条)... ✅
+   批次 686/1548 (8 条)... ✅
+   批次 687/1548 (8 条)... ✅
+   批次 688/1548 (8 条)... ✅
+   批次 689/1548 (8 条)... ✅
+   批次 690/1548 (8 条)... ✅
+   批次 691/1548 (8 条)... ✅
+   批次 692/1548 (8 条)... ✅
+   批次 693/1548 (8 条)... ✅
+   批次 694/1548 (8 条)... ✅
+   批次 695/1548 (8 条)... ✅
+   批次 696/1548 (8 条)... ✅
+   批次 697/1548 (8 条)... ✅
+   批次 698/1548 (8 条)... ✅
+   批次 699/1548 (8 条)... ✅
+   批次 700/1548 (8 条)... ✅
+   批次 701/1548 (8 条)... ✅
+   批次 702/1548 (8 条)... ✅
+   批次 703/1548 (8 条)... ✅
+   批次 704/1548 (8 条)... ✅
+   批次 705/1548 (8 条)... ✅
+   批次 706/1548 (8 条)... ✅
+   批次 707/1548 (8 条)... ✅
+   批次 708/1548 (8 条)... ✅
+   批次 709/1548 (8 条)... ✅
+   批次 710/1548 (8 条)... ✅
+   批次 711/1548 (8 条)... ✅
+   批次 712/1548 (8 条)... ✅
+   批次 713/1548 (8 条)... ✅
+   批次 714/1548 (8 条)... ✅
+   批次 715/1548 (8 条)... ✅
+   批次 716/1548 (8 条)... ✅
+   批次 717/1548 (8 条)... ✅
+   批次 718/1548 (8 条)... ✅
+   批次 719/1548 (8 条)... ✅
+   批次 720/1548 (8 条)... ✅
+   批次 721/1548 (8 条)... ✅
+   批次 722/1548 (8 条)... ✅
+   批次 723/1548 (8 条)... ✅
+   批次 724/1548 (8 条)... ✅
+   批次 725/1548 (8 条)... ✅
+   批次 726/1548 (8 条)... ✅
+   批次 727/1548 (8 条)... ✅
+   批次 728/1548 (8 条)... ✅
+   批次 729/1548 (8 条)... ✅
+   批次 730/1548 (8 条)... ✅
+   批次 731/1548 (8 条)... ✅
+   批次 732/1548 (8 条)... ✅
+   批次 733/1548 (8 条)... ✅
+   批次 734/1548 (8 条)... ✅
+   批次 735/1548 (8 条)... ✅
+   批次 736/1548 (8 条)... ✅
+   批次 737/1548 (8 条)... ✅
+   批次 738/1548 (8 条)... ✅
+   批次 739/1548 (8 条)... ✅
+   批次 740/1548 (8 条)... ✅
+   批次 741/1548 (8 条)... ✅
+   批次 742/1548 (8 条)... ✅
+   批次 743/1548 (8 条)... ✅
+   批次 744/1548 (8 条)... ✅
+   批次 745/1548 (8 条)... ✅
+   批次 746/1548 (8 条)... ✅
+   批次 747/1548 (8 条)... ✅
+   批次 748/1548 (8 条)... ✅
+   批次 749/1548 (8 条)... ✅
+   批次 750/1548 (8 条)... ✅
+   批次 751/1548 (8 条)... ✅
+   批次 752/1548 (8 条)... ✅
+   批次 753/1548 (8 条)... ✅
+   批次 754/1548 (8 条)... ✅
+   批次 755/1548 (8 条)... ✅
+   批次 756/1548 (8 条)... ✅
+   批次 757/1548 (8 条)... ✅
+   批次 758/1548 (8 条)... ✅
+   批次 759/1548 (8 条)... ✅
+   批次 760/1548 (8 条)... ✅
+   批次 761/1548 (8 条)... ✅
+   批次 762/1548 (8 条)... ✅
+   批次 763/1548 (8 条)... ✅
+   批次 764/1548 (8 条)... ✅
+   批次 765/1548 (8 条)... ✅
+   批次 766/1548 (8 条)... ✅
+   批次 767/1548 (8 条)... ✅
+   批次 768/1548 (8 条)... ✅
+   批次 769/1548 (8 条)... ✅
+   批次 770/1548 (8 条)... ✅
+   批次 771/1548 (8 条)... ✅
+   批次 772/1548 (8 条)... ✅
+   批次 773/1548 (8 条)... ✅
+   批次 774/1548 (8 条)... ✅
+   批次 775/1548 (8 条)... ✅
+   批次 776/1548 (8 条)... ✅
+   批次 777/1548 (8 条)... ✅
+   批次 778/1548 (8 条)... ✅
+   批次 779/1548 (8 条)... ✅
+   批次 780/1548 (8 条)... ✅
+   批次 781/1548 (8 条)... ✅
+   批次 782/1548 (8 条)... ✅
+   批次 783/1548 (8 条)... ✅
+   批次 784/1548 (8 条)... ✅
+   批次 785/1548 (8 条)... ✅
+   批次 786/1548 (8 条)... ✅
+   批次 787/1548 (8 条)... ✅
+   批次 788/1548 (8 条)... ✅
+   批次 789/1548 (8 条)... ✅
+   批次 790/1548 (8 条)... ✅
+   批次 791/1548 (8 条)... ✅
+   批次 792/1548 (8 条)... ✅
+   批次 793/1548 (8 条)... ✅
+   批次 794/1548 (8 条)... ✅
+   批次 795/1548 (8 条)... ✅
+   批次 796/1548 (8 条)... ✅
+   批次 797/1548 (8 条)... ✅
+   批次 798/1548 (8 条)... ✅
+   批次 799/1548 (8 条)... ✅
+   批次 800/1548 (8 条)... ✅
+   批次 801/1548 (8 条)... ✅
+   批次 802/1548 (8 条)... ✅
+   批次 803/1548 (8 条)... ✅
+   批次 804/1548 (8 条)... ✅
+   批次 805/1548 (8 条)... ✅
+   批次 806/1548 (8 条)... ✅
+   批次 807/1548 (8 条)... ✅
+   批次 808/1548 (8 条)... ✅
+   批次 809/1548 (8 条)... ✅
+   批次 810/1548 (8 条)... ✅
+   批次 811/1548 (8 条)... ✅
+   批次 812/1548 (8 条)... ✅
+   批次 813/1548 (8 条)... ✅
+   批次 814/1548 (8 条)... ✅
+   批次 815/1548 (8 条)... ✅
+   批次 816/1548 (8 条)... ✅
+   批次 817/1548 (8 条)... ✅
+   批次 818/1548 (8 条)... ✅
+   批次 819/1548 (8 条)... ✅
+   批次 820/1548 (8 条)... ✅
+   批次 821/1548 (8 条)... ✅
+   批次 822/1548 (8 条)... ✅
+   批次 823/1548 (8 条)... ✅
+   批次 824/1548 (8 条)... ✅
+   批次 825/1548 (8 条)... ✅
+   批次 826/1548 (8 条)... ✅
+   批次 827/1548 (8 条)... ✅
+   批次 828/1548 (8 条)... ✅
+   批次 829/1548 (8 条)... ✅
+   批次 830/1548 (8 条)... ✅
+   批次 831/1548 (8 条)... ✅
+   批次 832/1548 (8 条)... ✅
+   批次 833/1548 (8 条)... ✅
+   批次 834/1548 (8 条)... ✅
+   批次 835/1548 (8 条)... ✅
+   批次 836/1548 (8 条)... ✅
+   批次 837/1548 (8 条)... ✅
+   批次 838/1548 (8 条)... ✅
+   批次 839/1548 (8 条)... ✅
+   批次 840/1548 (8 条)... ✅
+   批次 841/1548 (8 条)... ✅
+   批次 842/1548 (8 条)... ✅
+   批次 843/1548 (8 条)... ✅
+   批次 844/1548 (8 条)... ✅
+   批次 845/1548 (8 条)... ✅
+   批次 846/1548 (8 条)... ✅
+   批次 847/1548 (8 条)... ✅
+   批次 848/1548 (8 条)... ✅
+   批次 849/1548 (8 条)... ✅
+   批次 850/1548 (8 条)... ✅
+   批次 851/1548 (8 条)... ✅
+   批次 852/1548 (8 条)... ✅
+   批次 853/1548 (8 条)... ✅
+   批次 854/1548 (8 条)... ✅
+   批次 855/1548 (8 条)... ✅
+   批次 856/1548 (8 条)... ✅
+   批次 857/1548 (8 条)... ✅
+   批次 858/1548 (8 条)... ✅
+   批次 859/1548 (8 条)... ✅
+   批次 860/1548 (8 条)... ✅
+   批次 861/1548 (8 条)... ✅
+   批次 862/1548 (8 条)... ✅
+   批次 863/1548 (8 条)... ✅
+   批次 864/1548 (8 条)... ✅
+   批次 865/1548 (8 条)... ✅
+   批次 866/1548 (8 条)... ✅
+   批次 867/1548 (8 条)... ✅
+   批次 868/1548 (8 条)... ✅
+   批次 869/1548 (8 条)... ✅
+   批次 870/1548 (8 条)... ✅
+   批次 871/1548 (8 条)... ✅
+   批次 872/1548 (8 条)... ✅
+   批次 873/1548 (8 条)... ✅
+   批次 874/1548 (8 条)... ✅
+   批次 875/1548 (8 条)... ✅
+   批次 876/1548 (8 条)... ✅
+   批次 877/1548 (8 条)... ✅
+   批次 878/1548 (8 条)... ✅
+   批次 879/1548 (8 条)... ✅
+   批次 880/1548 (8 条)... ✅
+   批次 881/1548 (8 条)... ✅
+   批次 882/1548 (8 条)... ✅
+   批次 883/1548 (8 条)... ✅
+   批次 884/1548 (8 条)... ✅
+   批次 885/1548 (8 条)... ✅
+   批次 886/1548 (8 条)... ✅
+   批次 887/1548 (8 条)... ✅
+   批次 888/1548 (8 条)... ✅
+   批次 889/1548 (8 条)... ✅
+   批次 890/1548 (8 条)... ✅
+   批次 891/1548 (8 条)... ✅
+   批次 892/1548 (8 条)... ✅
+   批次 893/1548 (8 条)... ✅
+   批次 894/1548 (8 条)... ✅
+   批次 895/1548 (8 条)... ✅
+   批次 896/1548 (8 条)... ✅
+   批次 897/1548 (8 条)... ✅
+   批次 898/1548 (8 条)... ✅
+   批次 899/1548 (8 条)... ✅
+   批次 900/1548 (8 条)... ✅
+   批次 901/1548 (8 条)... ✅
+   批次 902/1548 (8 条)... ✅
+   批次 903/1548 (8 条)... ✅
+   批次 904/1548 (8 条)... ✅
+   批次 905/1548 (8 条)... ✅
+   批次 906/1548 (8 条)... ✅
+   批次 907/1548 (8 条)... ✅
+   批次 908/1548 (8 条)... ✅
+   批次 909/1548 (8 条)... ✅
+   批次 910/1548 (8 条)... ✅
+   批次 911/1548 (8 条)... ✅
+   批次 912/1548 (8 条)... ✅
+   批次 913/1548 (8 条)... ✅
+   批次 914/1548 (8 条)... ✅
+   批次 915/1548 (8 条)... ✅
+   批次 916/1548 (8 条)... ✅
+   批次 917/1548 (8 条)... ✅
+   批次 918/1548 (8 条)... ✅
+   批次 919/1548 (8 条)... ✅
+   批次 920/1548 (8 条)... ✅
+   批次 921/1548 (8 条)... ✅
+   批次 922/1548 (8 条)... ✅
+   批次 923/1548 (8 条)... ✅
+   批次 924/1548 (8 条)... ✅
+   批次 925/1548 (8 条)... ✅
+   批次 926/1548 (8 条)... ✅
+   批次 927/1548 (8 条)... ✅
+   批次 928/1548 (8 条)... ✅
+   批次 929/1548 (8 条)... ✅
+   批次 930/1548 (8 条)... ✅
+   批次 931/1548 (8 条)... ✅
+   批次 932/1548 (8 条)... ✅
+   批次 933/1548 (8 条)... ✅
+   批次 934/1548 (8 条)... ✅
+   批次 935/1548 (8 条)... ✅
+   批次 936/1548 (8 条)... ✅
+   批次 937/1548 (8 条)... ✅
+   批次 938/1548 (8 条)... ✅
+   批次 939/1548 (8 条)... ✅
+   批次 940/1548 (8 条)... ✅
+   批次 941/1548 (8 条)... ✅
+   批次 942/1548 (8 条)... ✅
+   批次 943/1548 (8 条)... ✅
+   批次 944/1548 (8 条)... ✅
+   批次 945/1548 (8 条)... ✅
+   批次 946/1548 (8 条)... ✅
+   批次 947/1548 (8 条)... ✅
+   批次 948/1548 (8 条)... ✅
+   批次 949/1548 (8 条)... ✅
+   批次 950/1548 (8 条)... ✅
+   批次 951/1548 (8 条)... ✅
+   批次 952/1548 (8 条)... ✅
+   批次 953/1548 (8 条)... ✅
+   批次 954/1548 (8 条)... ✅
+   批次 955/1548 (8 条)... ✅
+   批次 956/1548 (8 条)... ✅
+   批次 957/1548 (8 条)... ✅
+   批次 958/1548 (8 条)... ✅
+   批次 959/1548 (8 条)... ✅
+   批次 960/1548 (8 条)... INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，8 条
+INFO:zhipu_retriever:✅ 批次 1 成功，2 条
+✅
+   批次 961/1548 (8 条)... ✅
+   批次 962/1548 (8 条)... ✅
+   批次 963/1548 (8 条)... ✅
+   批次 964/1548 (8 条)... ✅
+   批次 965/1548 (8 条)... ✅
+   批次 966/1548 (8 条)... ✅
+   批次 967/1548 (8 条)... ✅
+   批次 968/1548 (8 条)... ✅
+   批次 969/1548 (8 条)... ✅
+   批次 970/1548 (8 条)... ✅
+   批次 971/1548 (8 条)... ✅
+   批次 972/1548 (8 条)... ✅
+   批次 973/1548 (8 条)... ✅
+   批次 974/1548 (8 条)... ✅
+   批次 975/1548 (8 条)... ✅
+   批次 976/1548 (8 条)... ✅
+   批次 977/1548 (8 条)... ✅
+   批次 978/1548 (8 条)... ✅
+   批次 979/1548 (8 条)... ✅
+   批次 980/1548 (8 条)... ✅
+   批次 981/1548 (8 条)... ✅
+   批次 982/1548 (8 条)... ✅
+   批次 983/1548 (8 条)... ✅
+   批次 984/1548 (8 条)... ✅
+   批次 985/1548 (8 条)... ✅
+   批次 986/1548 (8 条)... ✅
+   批次 987/1548 (8 条)... ✅
+   批次 988/1548 (8 条)... ✅
+   批次 989/1548 (8 条)... ✅
+   批次 990/1548 (8 条)... ✅
+   批次 991/1548 (8 条)... ✅
+   批次 992/1548 (8 条)... ✅
+   批次 993/1548 (8 条)... ✅
+   批次 994/1548 (8 条)... ✅
+   批次 995/1548 (8 条)... ✅
+   批次 996/1548 (8 条)... ✅
+   批次 997/1548 (8 条)... ✅
+   批次 998/1548 (8 条)... ✅
+   批次 999/1548 (8 条)... ✅
+   批次 1000/1548 (8 条)... ✅
+   批次 1001/1548 (8 条)... ✅
+   批次 1002/1548 (8 条)... ✅
+   批次 1003/1548 (8 条)... ✅
+   批次 1004/1548 (8 条)... ✅
+   批次 1005/1548 (8 条)... ✅
+   批次 1006/1548 (8 条)... ✅
+   批次 1007/1548 (8 条)... ✅
+   批次 1008/1548 (8 条)... ✅
+   批次 1009/1548 (8 条)... ✅
+   批次 1010/1548 (8 条)... ✅
+   批次 1011/1548 (8 条)... ✅
+   批次 1012/1548 (8 条)... ✅
+   批次 1013/1548 (8 条)... ✅
+   批次 1014/1548 (8 条)... ✅
+   批次 1015/1548 (8 条)... ✅
+   批次 1016/1548 (8 条)... ✅
+   批次 1017/1548 (8 条)... ✅
+   批次 1018/1548 (8 条)... ✅
+   批次 1019/1548 (8 条)... ✅
+   批次 1020/1548 (8 条)... ✅
+   批次 1021/1548 (8 条)... ✅
+   批次 1022/1548 (8 条)... ✅
+   批次 1023/1548 (8 条)... ✅
+   批次 1024/1548 (8 条)... ✅
+   批次 1025/1548 (8 条)... ✅
+   批次 1026/1548 (8 条)... ✅
+   批次 1027/1548 (8 条)... ✅
+   批次 1028/1548 (8 条)... ✅
+   批次 1029/1548 (8 条)... ✅
+   批次 1030/1548 (8 条)... ✅
+   批次 1031/1548 (8 条)... ✅
+   批次 1032/1548 (8 条)... ✅
+   批次 1033/1548 (8 条)... ✅
+   批次 1034/1548 (8 条)... ✅
+   批次 1035/1548 (8 条)... ✅
+   批次 1036/1548 (8 条)... ✅
+   批次 1037/1548 (8 条)... ✅
+   批次 1038/1548 (8 条)... ✅
+   批次 1039/1548 (8 条)... ✅
+   批次 1040/1548 (8 条)... ✅
+   批次 1041/1548 (8 条)... ✅
+   批次 1042/1548 (8 条)... ✅
+   批次 1043/1548 (8 条)... ✅
+   批次 1044/1548 (8 条)... ✅
+   批次 1045/1548 (8 条)... ✅
+   批次 1046/1548 (8 条)... ✅
+   批次 1047/1548 (8 条)... ✅
+   批次 1048/1548 (8 条)... ✅
+   批次 1049/1548 (8 条)... ✅
+   批次 1050/1548 (8 条)... ✅
+   批次 1051/1548 (8 条)... ✅
+   批次 1052/1548 (8 条)... ✅
+   批次 1053/1548 (8 条)... ✅
+   批次 1054/1548 (8 条)... ✅
+   批次 1055/1548 (8 条)... ✅
+   批次 1056/1548 (8 条)... ✅
+   批次 1057/1548 (8 条)... ✅
+   批次 1058/1548 (8 条)... ✅
+   批次 1059/1548 (8 条)... ✅
+   批次 1060/1548 (8 条)... ✅
+   批次 1061/1548 (8 条)... ✅
+   批次 1062/1548 (8 条)... ✅
+   批次 1063/1548 (8 条)... ✅
+   批次 1064/1548 (8 条)... ✅
+   批次 1065/1548 (8 条)... ✅
+   批次 1066/1548 (8 条)... ✅
+   批次 1067/1548 (8 条)... ✅
+   批次 1068/1548 (8 条)... ✅
+   批次 1069/1548 (8 条)... ✅
+   批次 1070/1548 (8 条)... ✅
+   批次 1071/1548 (8 条)... ✅
+   批次 1072/1548 (8 条)... ✅
+   批次 1073/1548 (8 条)... ✅
+   批次 1074/1548 (8 条)... ✅
+   批次 1075/1548 (8 条)... ✅
+   批次 1076/1548 (8 条)... ✅
+   批次 1077/1548 (8 条)... ✅
+   批次 1078/1548 (8 条)... ✅
+   批次 1079/1548 (8 条)... ✅
+   批次 1080/1548 (8 条)... ✅
+   批次 1081/1548 (8 条)... ✅
+   批次 1082/1548 (8 条)... ✅
+   批次 1083/1548 (8 条)... ✅
+   批次 1084/1548 (8 条)... ✅
+   批次 1085/1548 (8 条)... ✅
+   批次 1086/1548 (8 条)... ✅
+   批次 1087/1548 (8 条)... ✅
+   批次 1088/1548 (8 条)... ✅
+   批次 1089/1548 (8 条)... ✅
+   批次 1090/1548 (8 条)... ✅
+   批次 1091/1548 (8 条)... ✅
+   批次 1092/1548 (8 条)... ✅
+   批次 1093/1548 (8 条)... ✅
+   批次 1094/1548 (8 条)... ✅
+   批次 1095/1548 (8 条)... ✅
+   批次 1096/1548 (8 条)... ✅
+   批次 1097/1548 (8 条)... ✅
+   批次 1098/1548 (8 条)... ✅
+   批次 1099/1548 (8 条)... ✅
+   批次 1100/1548 (8 条)... ✅
+   批次 1101/1548 (8 条)... ✅
+   批次 1102/1548 (8 条)... ✅
+   批次 1103/1548 (8 条)... ✅
+   批次 1104/1548 (8 条)... ✅
+   批次 1105/1548 (8 条)... ✅
+   批次 1106/1548 (8 条)... ✅
+   批次 1107/1548 (8 条)... ✅
+   批次 1108/1548 (8 条)... ✅
+   批次 1109/1548 (8 条)... ✅
+   批次 1110/1548 (8 条)... ✅
+   批次 1111/1548 (8 条)... ✅
+   批次 1112/1548 (8 条)... ✅
+   批次 1113/1548 (8 条)... ✅
+   批次 1114/1548 (8 条)... ✅
+   批次 1115/1548 (8 条)... ✅
+   批次 1116/1548 (8 条)... ✅
+   批次 1117/1548 (8 条)... ✅
+   批次 1118/1548 (8 条)... ✅
+   批次 1119/1548 (8 条)... ✅
+   批次 1120/1548 (8 条)... ✅
+   批次 1121/1548 (8 条)... ✅
+   批次 1122/1548 (8 条)... ✅
+   批次 1123/1548 (8 条)... ✅
+   批次 1124/1548 (8 条)... ✅
+   批次 1125/1548 (8 条)... ✅
+   批次 1126/1548 (8 条)... ✅
+   批次 1127/1548 (8 条)... ✅
+   批次 1128/1548 (8 条)... ✅
+   批次 1129/1548 (8 条)... ✅
+   批次 1130/1548 (8 条)... ✅
+   批次 1131/1548 (8 条)... ✅
+   批次 1132/1548 (8 条)... ✅
+   批次 1133/1548 (8 条)... ✅
+   批次 1134/1548 (8 条)... ✅
+   批次 1135/1548 (8 条)... ✅
+   批次 1136/1548 (8 条)... ✅
+   批次 1137/1548 (8 条)... ✅
+   批次 1138/1548 (8 条)... ✅
+   批次 1139/1548 (8 条)... ✅
+   批次 1140/1548 (8 条)... ✅
+   批次 1141/1548 (8 条)... ✅
+   批次 1142/1548 (8 条)... ✅
+   批次 1143/1548 (8 条)... ✅
+   批次 1144/1548 (8 条)... ✅
+   批次 1145/1548 (8 条)... ✅
+   批次 1146/1548 (8 条)... ✅
+   批次 1147/1548 (8 条)... ✅
+   批次 1148/1548 (8 条)... ✅
+   批次 1149/1548 (8 条)... ✅
+   批次 1150/1548 (8 条)... ✅
+   批次 1151/1548 (8 条)... ✅
+   批次 1152/1548 (8 条)... ✅
+   批次 1153/1548 (8 条)... ✅
+   批次 1154/1548 (8 条)... ✅
+   批次 1155/1548 (8 条)... ✅
+   批次 1156/1548 (8 条)... ✅
+   批次 1157/1548 (8 条)... ✅
+   批次 1158/1548 (8 条)... ✅
+   批次 1159/1548 (8 条)... ✅
+   批次 1160/1548 (8 条)... ✅
+   批次 1161/1548 (8 条)... ✅
+   批次 1162/1548 (8 条)... ✅
+   批次 1163/1548 (8 条)... ✅
+   批次 1164/1548 (8 条)... ✅
+   批次 1165/1548 (8 条)... ✅
+   批次 1166/1548 (8 条)... ✅
+   批次 1167/1548 (8 条)... ✅
+   批次 1168/1548 (8 条)... ✅
+   批次 1169/1548 (8 条)... ✅
+   批次 1170/1548 (8 条)... ✅
+   批次 1171/1548 (8 条)... ✅
+   批次 1172/1548 (8 条)... ✅
+   批次 1173/1548 (8 条)... ✅
+   批次 1174/1548 (8 条)... ✅
+   批次 1175/1548 (8 条)... ✅
+   批次 1176/1548 (8 条)... ✅
+   批次 1177/1548 (8 条)... ✅
+   批次 1178/1548 (8 条)... ✅
+   批次 1179/1548 (8 条)... ✅
+   批次 1180/1548 (8 条)... ✅
+   批次 1181/1548 (8 条)... ✅
+   批次 1182/1548 (8 条)... ✅
+   批次 1183/1548 (8 条)... ✅
+   批次 1184/1548 (8 条)... ✅
+   批次 1185/1548 (8 条)... ✅
+   批次 1186/1548 (8 条)... ✅
+   批次 1187/1548 (8 条)... ✅
+   批次 1188/1548 (8 条)... ✅
+   批次 1189/1548 (8 条)... ✅
+   批次 1190/1548 (8 条)... ✅
+   批次 1191/1548 (8 条)... ✅
+   批次 1192/1548 (8 条)... ✅
+   批次 1193/1548 (8 条)... ✅
+   批次 1194/1548 (8 条)... ✅
+   批次 1195/1548 (8 条)... ✅
+   批次 1196/1548 (8 条)... ✅
+   批次 1197/1548 (8 条)... ✅
+   批次 1198/1548 (8 条)... ✅
+   批次 1199/1548 (8 条)... ✅
+   批次 1200/1548 (8 条)... ✅
+   批次 1201/1548 (8 条)... ✅
+   批次 1202/1548 (8 条)... ✅
+   批次 1203/1548 (8 条)... ✅
+   批次 1204/1548 (8 条)... ✅
+   批次 1205/1548 (8 条)... ✅
+   批次 1206/1548 (8 条)... ✅
+   批次 1207/1548 (8 条)... ✅
+   批次 1208/1548 (8 条)... ✅
+   批次 1209/1548 (8 条)... ✅
+   批次 1210/1548 (8 条)... ✅
+   批次 1211/1548 (8 条)... ✅
+   批次 1212/1548 (8 条)... ✅
+   批次 1213/1548 (8 条)... ✅
+   批次 1214/1548 (8 条)... ✅
+   批次 1215/1548 (8 条)... ✅
+   批次 1216/1548 (8 条)... ✅
+   批次 1217/1548 (8 条)... ✅
+   批次 1218/1548 (8 条)... ✅
+   批次 1219/1548 (8 条)... ✅
+   批次 1220/1548 (8 条)... ✅
+   批次 1221/1548 (8 条)... ✅
+   批次 1222/1548 (8 条)... ✅
+   批次 1223/1548 (8 条)... ✅
+   批次 1224/1548 (8 条)... ✅
+   批次 1225/1548 (8 条)... ✅
+   批次 1226/1548 (8 条)... ✅
+   批次 1227/1548 (8 条)... ✅
+   批次 1228/1548 (8 条)... ✅
+   批次 1229/1548 (8 条)... ✅
+   批次 1230/1548 (8 条)... ✅
+   批次 1231/1548 (8 条)... ✅
+   批次 1232/1548 (8 条)... ✅
+   批次 1233/1548 (8 条)... ✅
+   批次 1234/1548 (8 条)... ✅
+   批次 1235/1548 (8 条)... ✅
+   批次 1236/1548 (8 条)... ✅
+   批次 1237/1548 (8 条)... ✅
+   批次 1238/1548 (8 条)... ✅
+   批次 1239/1548 (8 条)... ✅
+   批次 1240/1548 (8 条)... ✅
+   批次 1241/1548 (8 条)... ✅
+   批次 1242/1548 (8 条)... ✅
+   批次 1243/1548 (8 条)... ✅
+   批次 1244/1548 (8 条)... ✅
+   批次 1245/1548 (8 条)... ✅
+   批次 1246/1548 (8 条)... ✅
+   批次 1247/1548 (8 条)... ✅
+   批次 1248/1548 (8 条)... ✅
+   批次 1249/1548 (8 条)... ✅
+   批次 1250/1548 (8 条)... ✅
+   批次 1251/1548 (8 条)... ✅
+   批次 1252/1548 (8 条)... ✅
+   批次 1253/1548 (8 条)... ✅
+   批次 1254/1548 (8 条)... ✅
+   批次 1255/1548 (8 条)... ✅
+   批次 1256/1548 (8 条)... ✅
+   批次 1257/1548 (8 条)... ✅
+   批次 1258/1548 (8 条)... ✅
+   批次 1259/1548 (8 条)... ✅
+   批次 1260/1548 (8 条)... ✅
+   批次 1261/1548 (8 条)... ✅
+   批次 1262/1548 (8 条)... ✅
+   批次 1263/1548 (8 条)... ✅
+   批次 1264/1548 (8 条)... ✅
+   批次 1265/1548 (8 条)... ✅
+   批次 1266/1548 (8 条)... ✅
+   批次 1267/1548 (8 条)... ✅
+   批次 1268/1548 (8 条)... ✅
+   批次 1269/1548 (8 条)... ✅
+   批次 1270/1548 (8 条)... ✅
+   批次 1271/1548 (8 条)... ✅
+   批次 1272/1548 (8 条)... ✅
+   批次 1273/1548 (8 条)... ✅
+   批次 1274/1548 (8 条)... ✅
+   批次 1275/1548 (8 条)... ✅
+   批次 1276/1548 (8 条)... ✅
+   批次 1277/1548 (8 条)... ✅
+   批次 1278/1548 (8 条)... ✅
+   批次 1279/1548 (8 条)... ✅
+   批次 1280/1548 (8 条)... ✅
+   批次 1281/1548 (8 条)... ✅
+   批次 1282/1548 (8 条)... ✅
+   批次 1283/1548 (8 条)... ✅
+   批次 1284/1548 (8 条)... ✅
+   批次 1285/1548 (8 条)... ✅
+   批次 1286/1548 (8 条)... ✅
+   批次 1287/1548 (8 条)... ✅
+   批次 1288/1548 (8 条)... ✅
+   批次 1289/1548 (8 条)... ✅
+   批次 1290/1548 (8 条)... ✅
+   批次 1291/1548 (8 条)... ✅
+   批次 1292/1548 (8 条)... ✅
+   批次 1293/1548 (8 条)... ✅
+   批次 1294/1548 (8 条)... ✅
+   批次 1295/1548 (8 条)... ✅
+   批次 1296/1548 (8 条)... ✅
+   批次 1297/1548 (8 条)... ✅
+   批次 1298/1548 (8 条)... ✅
+   批次 1299/1548 (8 条)... ✅
+   批次 1300/1548 (8 条)... ✅
+   批次 1301/1548 (8 条)... ✅
+   批次 1302/1548 (8 条)... ✅
+   批次 1303/1548 (8 条)... ✅
+   批次 1304/1548 (8 条)... ✅
+   批次 1305/1548 (8 条)... ✅
+   批次 1306/1548 (8 条)... ✅
+   批次 1307/1548 (8 条)... ✅
+   批次 1308/1548 (8 条)... ✅
+   批次 1309/1548 (8 条)... ✅
+   批次 1310/1548 (8 条)... ✅
+   批次 1311/1548 (8 条)... ✅
+   批次 1312/1548 (8 条)... ✅
+   批次 1313/1548 (8 条)... ✅
+   批次 1314/1548 (8 条)... ✅
+   批次 1315/1548 (8 条)... ✅
+   批次 1316/1548 (8 条)... ✅
+   批次 1317/1548 (8 条)... ✅
+   批次 1318/1548 (8 条)... ✅
+   批次 1319/1548 (8 条)... ✅
+   批次 1320/1548 (8 条)... ✅
+   批次 1321/1548 (8 条)... ✅
+   批次 1322/1548 (8 条)... ✅
+   批次 1323/1548 (8 条)... ✅
+   批次 1324/1548 (8 条)... ✅
+   批次 1325/1548 (8 条)... ✅
+   批次 1326/1548 (8 条)... ✅
+   批次 1327/1548 (8 条)... ✅
+   批次 1328/1548 (8 条)... ✅
+   批次 1329/1548 (8 条)... ✅
+   批次 1330/1548 (8 条)... ✅
+   批次 1331/1548 (8 条)... ✅
+   批次 1332/1548 (8 条)... ✅
+   批次 1333/1548 (8 条)... ✅
+   批次 1334/1548 (8 条)... ✅
+   批次 1335/1548 (8 条)... ✅
+   批次 1336/1548 (8 条)... ✅
+   批次 1337/1548 (8 条)... ✅
+   批次 1338/1548 (8 条)... ✅
+   批次 1339/1548 (8 条)... ✅
+   批次 1340/1548 (8 条)... ✅
+   批次 1341/1548 (8 条)... ✅
+   批次 1342/1548 (8 条)... ✅
+   批次 1343/1548 (8 条)... ✅
+   批次 1344/1548 (8 条)... ✅
+   批次 1345/1548 (8 条)... ✅
+   批次 1346/1548 (8 条)... ✅
+   批次 1347/1548 (8 条)... ✅
+   批次 1348/1548 (8 条)... ✅
+   批次 1349/1548 (8 条)... ✅
+   批次 1350/1548 (8 条)... ✅
+   批次 1351/1548 (8 条)... ✅
+   批次 1352/1548 (8 条)... ✅
+   批次 1353/1548 (8 条)... ✅
+   批次 1354/1548 (8 条)... ✅
+   批次 1355/1548 (8 条)... ✅
+   批次 1356/1548 (8 条)... ✅
+   批次 1357/1548 (8 条)... ✅
+   批次 1358/1548 (8 条)... ✅
+   批次 1359/1548 (8 条)... ✅
+   批次 1360/1548 (8 条)... ✅
+   批次 1361/1548 (8 条)... ✅
+   批次 1362/1548 (8 条)... ✅
+   批次 1363/1548 (8 条)... ✅
+   批次 1364/1548 (8 条)... ✅
+   批次 1365/1548 (8 条)... ✅
+   批次 1366/1548 (8 条)... ✅
+   批次 1367/1548 (8 条)... ✅
+   批次 1368/1548 (8 条)... ✅
+   批次 1369/1548 (8 条)... ✅
+   批次 1370/1548 (8 条)... ✅
+   批次 1371/1548 (8 条)... ✅
+   批次 1372/1548 (8 条)... ✅
+   批次 1373/1548 (8 条)... ✅
+   批次 1374/1548 (8 条)... ✅
+   批次 1375/1548 (8 条)... ✅
+   批次 1376/1548 (8 条)... ✅
+   批次 1377/1548 (8 条)... ✅
+   批次 1378/1548 (8 条)... ✅
+   批次 1379/1548 (8 条)... ✅
+   批次 1380/1548 (8 条)... ✅
+   批次 1381/1548 (8 条)... ✅
+   批次 1382/1548 (8 条)... ✅
+   批次 1383/1548 (8 条)... ✅
+   批次 1384/1548 (8 条)... ✅
+   批次 1385/1548 (8 条)... ✅
+   批次 1386/1548 (8 条)... ✅
+   批次 1387/1548 (8 条)... ✅
+   批次 1388/1548 (8 条)... ✅
+   批次 1389/1548 (8 条)... ✅
+   批次 1390/1548 (8 条)... ✅
+   批次 1391/1548 (8 条)... ✅
+   批次 1392/1548 (8 条)... ✅
+   批次 1393/1548 (8 条)... ✅
+   批次 1394/1548 (8 条)... ✅
+   批次 1395/1548 (8 条)... ✅
+   批次 1396/1548 (8 条)... ✅
+   批次 1397/1548 (8 条)... ✅
+   批次 1398/1548 (8 条)... ✅
+   批次 1399/1548 (8 条)... ✅
+   批次 1400/1548 (8 条)... ✅
+   批次 1401/1548 (8 条)... ✅
+   批次 1402/1548 (8 条)... ✅
+   批次 1403/1548 (8 条)... ✅
+   批次 1404/1548 (8 条)... ✅
+   批次 1405/1548 (8 条)... ✅
+   批次 1406/1548 (8 条)... ✅
+   批次 1407/1548 (8 条)... ✅
+   批次 1408/1548 (8 条)... ✅
+   批次 1409/1548 (8 条)... ✅
+   批次 1410/1548 (8 条)... ✅
+   批次 1411/1548 (8 条)... ✅
+   批次 1412/1548 (8 条)... ✅
+   批次 1413/1548 (8 条)... ✅
+   批次 1414/1548 (8 条)... ✅
+   批次 1415/1548 (8 条)... ✅
+   批次 1416/1548 (8 条)... ✅
+   批次 1417/1548 (8 条)... ✅
+   批次 1418/1548 (8 条)... ✅
+   批次 1419/1548 (8 条)... ✅
+   批次 1420/1548 (8 条)... ✅
+   批次 1421/1548 (8 条)... ✅
+   批次 1422/1548 (8 条)... ✅
+   批次 1423/1548 (8 条)... ✅
+   批次 1424/1548 (8 条)... ✅
+   批次 1425/1548 (8 条)... ✅
+   批次 1426/1548 (8 条)... ✅
+   批次 1427/1548 (8 条)... ✅
+   批次 1428/1548 (8 条)... ✅
+   批次 1429/1548 (8 条)... ✅
+   批次 1430/1548 (8 条)... ✅
+   批次 1431/1548 (8 条)... ✅
+   批次 1432/1548 (8 条)... ✅
+   批次 1433/1548 (8 条)... ✅
+   批次 1434/1548 (8 条)... ✅
+   批次 1435/1548 (8 条)... ✅
+   批次 1436/1548 (8 条)... ✅
+   批次 1437/1548 (8 条)... ✅
+   批次 1438/1548 (8 条)... ✅
+   批次 1439/1548 (8 条)... ✅
+   批次 1440/1548 (8 条)... ✅
+   批次 1441/1548 (8 条)... ✅
+   批次 1442/1548 (8 条)... ✅
+   批次 1443/1548 (8 条)... ✅
+   批次 1444/1548 (8 条)... ✅
+   批次 1445/1548 (8 条)... ✅
+   批次 1446/1548 (8 条)... ✅
+   批次 1447/1548 (8 条)... ✅
+   批次 1448/1548 (8 条)... ✅
+   批次 1449/1548 (8 条)... ✅
+   批次 1450/1548 (8 条)... ✅
+   批次 1451/1548 (8 条)... ✅
+   批次 1452/1548 (8 条)... ✅
+   批次 1453/1548 (8 条)... ✅
+   批次 1454/1548 (8 条)... ✅
+   批次 1455/1548 (8 条)... ✅
+   批次 1456/1548 (8 条)... ✅
+   批次 1457/1548 (8 条)... ✅
+   批次 1458/1548 (8 条)... ✅
+   批次 1459/1548 (8 条)... ✅
+   批次 1460/1548 (8 条)... ✅
+   批次 1461/1548 (8 条)... ✅
+   批次 1462/1548 (8 条)... ✅
+   批次 1463/1548 (8 条)... ✅
+   批次 1464/1548 (8 条)... ✅
+   批次 1465/1548 (8 条)... ✅
+   批次 1466/1548 (8 条)... ✅
+   批次 1467/1548 (8 条)... ✅
+   批次 1468/1548 (8 条)... ✅
+   批次 1469/1548 (8 条)... ✅
+   批次 1470/1548 (8 条)... ✅
+   批次 1471/1548 (8 条)... ✅
+   批次 1472/1548 (8 条)... ✅
+   批次 1473/1548 (8 条)... ✅
+   批次 1474/1548 (8 条)... ✅
+   批次 1475/1548 (8 条)... ✅
+   批次 1476/1548 (8 条)... ✅
+   批次 1477/1548 (8 条)... ✅
+   批次 1478/1548 (8 条)... ✅
+   批次 1479/1548 (8 条)... ✅
+   批次 1480/1548 (8 条)... ✅
+   批次 1481/1548 (8 条)... ✅
+   批次 1482/1548 (8 条)... ✅
+   批次 1483/1548 (8 条)... ✅
+   批次 1484/1548 (8 条)... ✅
+   批次 1485/1548 (8 条)... ✅
+   批次 1486/1548 (8 条)... ✅
+   批次 1487/1548 (8 条)... ✅
+   批次 1488/1548 (8 条)... ✅
+   批次 1489/1548 (8 条)... ✅
+   批次 1490/1548 (8 条)... ✅
+   批次 1491/1548 (8 条)... ✅
+   批次 1492/1548 (8 条)... ✅
+   批次 1493/1548 (8 条)... ✅
+   批次 1494/1548 (8 条)... ✅
+   批次 1495/1548 (8 条)... ✅
+   批次 1496/1548 (8 条)... ✅
+   批次 1497/1548 (8 条)... ✅
+   批次 1498/1548 (8 条)... ✅
+   批次 1499/1548 (8 条)... ✅
+   批次 1500/1548 (8 条)... ✅
+   批次 1501/1548 (8 条)... ✅
+   批次 1502/1548 (8 条)... ✅
+   批次 1503/1548 (8 条)... ✅
+   批次 1504/1548 (8 条)... ✅
+   批次 1505/1548 (8 条)... ✅
+   批次 1506/1548 (8 条)... ✅
+   批次 1507/1548 (8 条)... ✅
+   批次 1508/1548 (8 条)... ✅
+   批次 1509/1548 (8 条)... ✅
+   批次 1510/1548 (8 条)... ✅
+   批次 1511/1548 (8 条)... ✅
+   批次 1512/1548 (8 条)... ✅
+   批次 1513/1548 (8 条)... ✅
+   批次 1514/1548 (8 条)... ✅
+   批次 1515/1548 (8 条)... ✅
+   批次 1516/1548 (8 条)... ✅
+   批次 1517/1548 (8 条)... ✅
+   批次 1518/1548 (8 条)... ✅
+   批次 1519/1548 (8 条)... ✅
+   批次 1520/1548 (8 条)... ✅
+   批次 1521/1548 (8 条)... ✅
+   批次 1522/1548 (8 条)... ✅
+   批次 1523/1548 (8 条)... ✅
+   批次 1524/1548 (8 条)... ✅
+   批次 1525/1548 (8 条)... ✅
+   批次 1526/1548 (8 条)... ✅
+   批次 1527/1548 (8 条)... ✅
+   批次 1528/1548 (8 条)... ✅
+   批次 1529/1548 (8 条)... ✅
+   批次 1530/1548 (8 条)... ✅
+   批次 1531/1548 (8 条)... ✅
+   批次 1532/1548 (8 条)... ✅
+   批次 1533/1548 (8 条)... ✅
+   批次 1534/1548 (8 条)... ✅
+   批次 1535/1548 (8 条)... ✅
+   批次 1536/1548 (8 条)... ✅
+   批次 1537/1548 (8 条)... ✅
+   批次 1538/1548 (8 条)... ✅
+   批次 1539/1548 (8 条)... ✅
+   批次 1540/1548 (8 条)... ✅
+   批次 1541/1548 (8 条)... ✅
+   批次 1542/1548 (8 条)... ✅
+   批次 1543/1548 (8 条)... ✅
+   批次 1544/1548 (8 条)... ✅
+   批次 1545/1548 (8 条)... ✅
+   批次 1546/1548 (8 条)... ✅
+   批次 1547/1548 (8 条)... ✅
+   批次 1548/1548 (2 条)... ✅
+✅ 索引构建完成: (12378, 1024)
+💾 保存索引到: data/zhipu_index
+✅ 索引保存完成！
+   - 向量文件: data/zhipu_index/embeddings.npy
+   - 元数据: data/zhipu_index/metadata.json
+   - 维度: 1024
