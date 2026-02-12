@@ -27,8 +27,23 @@ try:
     logger.info("✅ ZhipuEmbeddingRetriever 导入成功")
 except ImportError as e:
     logger.warning(f"⚠️ 无法导入 ZhipuEmbeddingRetriever: {e}")
-    ZhipuEmbeddingRetriever = None
-    ZHIPU_RETRIEVER_AVAILABLE = False
+    # 尝试绝对路径导入
+    try:
+        import importlib.util
+        zhipu_path = Path(__file__).parent / "zhipu_retriever.py"
+        if zhipu_path.exists():
+            spec = importlib.util.spec_from_file_location("zhipu_retriever", zhipu_path)
+            zhipu_module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(zhipu_module)
+            ZhipuEmbeddingRetriever = zhipu_module.ZhipuEmbeddingRetriever
+            ZHIPU_RETRIEVER_AVAILABLE = True
+            logger.info("✅ ZhipuEmbeddingRetriever 通过绝对路径导入成功")
+        else:
+            raise FileNotFoundError(f"找不到文件: {zhipu_path}")
+    except Exception as e2:
+        logger.error(f"❌ 绝对路径导入也失败: {e2}")
+        ZhipuEmbeddingRetriever = None
+        ZHIPU_RETRIEVER_AVAILABLE = False
 
 
 class ExpertSystemV2:
